@@ -83,34 +83,36 @@
 
                 
                 <!-- User Dropdown Menu -->
-<li class="nav-item dropdown">
-    <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="fas fa-user-circle"></i> 
-        @if (Auth::check())
-            {{ Auth::user()->name }}
-        @else
-            Invitado
-        @endif
-    </a>
-    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        @if (Auth::check())
-            <a href="#" class="dropdown-item">
-                <i class="fas fa-user mr-2"></i> Perfil
-            </a>
-            <div class="dropdown-divider"></div>
-            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit" class="dropdown-item">
-                    <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
-                </button>
-            </form>
-        @else
-            <a href="{{ route('login') }}" class="dropdown-item">
-                <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión
-            </a>
-        @endif
-    </div>
-</li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        @if (Auth::check() && Auth::user()->foto)
+                            <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="User Image" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+                        @else
+                            <i class="fas fa-user-circle"></i>
+                        @endif
+                        {{ Auth::check() ? Auth::user()->name : 'Invitado' }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        @if (Auth::check())
+                            <a href="{{ route('perfil') }}" class="dropdown-item">
+                                <i class="fas fa-user mr-2"></i> Perfil
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+                                </button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="dropdown-item">
+                                <i class="fas fa-sign-in-alt mr-2"></i> Iniciar Sesión
+                            </a>
+                        @endif
+                    </div>
+                </li>
+                
+                
 
             </ul>
         </nav>
@@ -316,6 +318,14 @@
                     @csrf
                 </form>
             </li>
+
+            <!-- Ayuda -->
+<li class="nav-item">
+    <a href="https://drive.google.com/file/d/12LvgCxA9JhTIboIjHqeqs7EPJ9N3jc9u/view?usp=sharing" class="nav-link" target="_blank">
+        <i class="nav-icon fas fa-question-circle text-info"></i>
+        <p class="ml-2">Ayuda</p>
+    </a>
+</li>
         </ul>
     </nav>
 </aside>

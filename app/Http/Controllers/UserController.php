@@ -44,6 +44,7 @@ public function editImage($id)
     return view('users.editImage', compact('user'));
 }
 
+
 public function store(Request $request)
 {
     $request->validate([
@@ -93,5 +94,30 @@ public function update(Request $request, $id)
 
     return redirect()->route('users.index')->with('status', 'Usuario actualizado correctamente.');
 }
+
+public function perfil()
+    {
+        $usuario = Auth::user();
+        return view('perfil', compact('usuario'));
+    }
+
+    public function updateImage(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+
+    $request->validate([
+        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('foto')) {
+        $path = $request->file('foto')->store('fotos', 'public');
+        $user->foto = $path;
+        $user->save();
+    }
+
+    return redirect()->route('perfil')->with('status', 'Imagen actualizada correctamente.');
+}
+
+
 
 }

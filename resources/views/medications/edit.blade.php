@@ -43,6 +43,10 @@
         color: #2c3e50; /* Header color */
         font-weight: 600; /* Bold header */
     }
+
+    .alert {
+        margin-bottom: 20px;
+    }
 </style>
 
 <div class="container mt-5">
@@ -54,24 +58,38 @@
                     <h5 class="mb-0">Detalles del Medicamento</h5>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form action="{{ route('medications.update', $medication->id) }}" method="POST">
                         @csrf
                         @method('PATCH')
                         <div class="form-group">
+                            <label for="codigo">Código</label>
+                            <input type="text" name="codigo" class="form-control" value="{{ old('codigo', $medication->codigo) }}" required>
+                        </div>
+                        <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" value="{{ $medication->nombre }}" required>
+                            <input type="text" name="nombre" class="form-control" value="{{ old('nombre', $medication->nombre) }}" required>
                         </div>
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
-                            <textarea name="descripcion" class="form-control" rows="3">{{ $medication->descripcion }}</textarea>
+                            <textarea name="descripcion" class="form-control" rows="3">{{ old('descripcion', $medication->descripcion) }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control" value="{{ $medication->cantidad }}" required min="1">
+                            <input type="number" name="cantidad" class="form-control" value="{{ old('cantidad', $medication->cantidad) }}" required min="1">
                         </div>
                         <div class="form-group">
                             <label for="fecha_caducidad">Fecha de Caducidad</label>
-                            <input type="date" name="fecha_caducidad" class="form-control" value="{{ $medication->fecha_caducidad->format('Y-m-d') }}" required>
+                            <input type="date" name="fecha_caducidad" class="form-control" value="{{ old('fecha_caducidad', $medication->fecha_caducidad->format('Y-m-d')) }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Actualizar</button>
                     </form>

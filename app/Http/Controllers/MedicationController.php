@@ -99,4 +99,27 @@ class MedicationController extends Controller
             return redirect()->route('medications.index')->with('error', 'No hay suficiente cantidad disponible.');
         }
     }
+
+    public function sale(Request $request)
+{
+    $request->validate([
+        'medication_id' => 'required|exists:medications,id',
+        'cantidad' => 'required|integer|min:1',
+    ]);
+
+    $medication = Medication::find($request->medication_id);
+
+    // Verificar si hay suficiente cantidad
+    if ($medication->cantidad >= $request->cantidad) {
+        $medication->cantidad -= $request->cantidad;
+        $medication->save();
+
+        return redirect()->route('medications.index')->with('success', 'Salida registrada correctamente.');
+    }
+
+    return redirect()->route('medications.index')->with('error', 'No hay suficiente cantidad disponible.');
+}
+
+
+    
 }

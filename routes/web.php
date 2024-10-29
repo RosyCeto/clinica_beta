@@ -108,3 +108,28 @@ Route::get('/nurses', [NurseController::class, 'index'])->name('nurses.index');
 Route::resource('doctors', DoctorController::class);
 Route::get('/inmunizaciones/mostrarDosis', [InmunizacionController::class, 'mostrarDosis'])->name('inmunizaciones.mostrarDosis');
 Route::get('/resultados/create/{realizarExamenId}', [ResultadosLaboratorioController::class, 'create'])->name('resultados.create');
+Route::get('/perfil', [UserController::class, 'perfil'])->name('perfil')->middleware('auth');
+Route::get('users/{id}/editImage', [UserController::class, 'editImage'])->name('users.editImage');
+Route::patch('users/{id}/updateImage', [UserController::class, 'updateImage'])->name('users.updateImage');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+use App\Http\Controllers\ReporteController;
+
+// Rutas de reportes
+Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
+Route::get('/reportes/pacientes', [ReporteController::class, 'reportePacientes'])->name('reportes.pacientes');
+Route::get('/reportes/historiales', [ReporteController::class, 'reporteHistoriales'])->name('reportes.historiales');
+Route::get('/reportes/farmacia', [ReporteController::class, 'reporteFarmacia'])->name('reportes.farmacia');
+
+Route::get('/reportes/historiales', [ReporteController::class, 'reporteHistoriales'])->name('reportes.historiales');
+Route::get('/reportes/farmacia', [ReporteController::class, 'reporteFarmacia'])->name('reportes.farmacia');
+Route::post('/inmunizaciones/dosis', [InmunizacionController::class, 'mostrarDosis'])->name('inmunizaciones.mostrarDosis');
+
+// Ruta para registrar la salida
+Route::post('medications/sale', [MedicationController::class, 'sale'])->name('medications.sale');
+use App\Http\Controllers\SalidaController;
+
+Route::resource('salidas', SalidaController::class);
+Route::get('/export/salidas', [ReporteController::class, 'exportSalidas'])->name('export.salidas');
+
+Route::get('/eliminar-citas-pasadas', [CitaController::class, 'eliminarPasadas']);

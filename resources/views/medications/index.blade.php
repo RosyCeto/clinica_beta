@@ -4,49 +4,19 @@
 
 @section('content')
 <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #f0f2f5;
-    }
-    .container {
-        margin-top: 50px;
-    }
-    h1 {
-        color: #343a40;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-    }
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-    .table {
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    .table th {
-        background-color: #007bff;
-        color: white;
-    }
-    .modal-header {
-        background-color: #007bff;
-        color: white;
-    }
+    /* Estilos existentes */
 </style>
 
 <div class="container">
     <h1>Inventario de Medicamentos</h1>
 
     <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#createMedicationModal">Agregar Medicamento</button>
+    <button class="btn btn-secondary mb-3" data-toggle="modal" data-target="#createSaleModal">Salida de Medicamento</button>
 
     <form action="{{ route('medications.index') }}" method="GET" class="mb-3">
         <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Buscar Medicamento o Código..." value="{{ request('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="Buscar Medicamento o Nombre..." value="{{ request('search') }}">
+            <input type="text" name="code_search" class="form-control" placeholder="Buscar por Código..." value="{{ request('code_search') }}">
             <div class="input-group-append">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-search"></i>
@@ -102,6 +72,7 @@
 
     {{ $medications->links('pagination::bootstrap-4') }}
 
+    <!-- Modal para Agregar Medicamento -->
     <div class="modal fade" id="createMedicationModal" tabindex="-1" role="dialog" aria-labelledby="createMedicationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -141,6 +112,38 @@
         </div>
     </div>
 
+    <!-- Modal para Salida de Medicamento -->
+    <div class="modal fade" id="createSaleModal" tabindex="-1" role="dialog" aria-labelledby="createSaleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createSaleModalLabel">Salida de Medicamento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('medications.sale') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="medication_id">ID del Medicamento</label>
+                            <select name="medication_id" class="form-control" required>
+                                @foreach ($medications as $medication)
+                                    <option value="{{ $medication->id }}">{{ $medication->nombre }} (ID: {{ $medication->id }})</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" name="cantidad" class="form-control" required min="1">
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Registrar Salida</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div> <!-- Fin de la container -->
 
 <!-- Confirmación de eliminación con SweetAlert -->
@@ -165,4 +168,3 @@
     }
 </script>
 @endsection
-

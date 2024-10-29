@@ -7,15 +7,17 @@ use App\Models\Patient;
 use App\Models\Medico;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log; 
 
 class CitaController extends Controller
 {
     public function index()
-{
-    $citas = Cita::paginate(10); // Esto devuelve una instancia de LengthAwarePaginator
-    $citasPendientesCount = Cita::where('status', 'pendiente')->count();
-    return view('citas.index', compact('citas', 'citasPendientesCount')); // Agregamos 'citasPendientesCount' a la vista
-}
+    {
+   
+        $citas = Cita::paginate(10); // Esto devuelve una instancia de LengthAwarePaginator
+        $citasPendientesCount = Cita::where('status', 'pendiente')->count();
+        return view('citas.index', compact('citas', 'citasPendientesCount')); // Agregamos 'citasPendientesCount' a la vista
+    }
 
 
 
@@ -93,6 +95,7 @@ public function store(Request $request)
 
     return redirect()->route('citas.index')->with('success', 'Cita reprogramada con éxito.');
 }
+
 
 
 }

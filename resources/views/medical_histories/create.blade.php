@@ -148,40 +148,25 @@
                     <i class="fas fa-times fa-lg"></i> Cancelar
                 </a>
             </div>
-
         </form>
+
         @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
     </div>
 
-    
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/2qic79wlju1dc8wellsulukftwqpojtm60jgu1rgmkxfjxe1/tinymce/6.3.1/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
-        $(document).ready(function() {
-        tinymce.init({
-            selector: '#consultation_reason, #current_illness_history, #diagnosis_treatment, #comments', // Selecciona los textarea específicos
-            plugins: 'link code',
-                toolbar: 'undo redo | styleselect | bold italic | link',
-                height: 200,
-            });
-
-              // Inicializa Select2 si se usa en otro lugar
-        });
         $('form').on('submit', function(event) {
             console.log("Formulario enviado");
             $(this).find(':submit').attr('disabled', 'disabled');
         });
-        
     </script>
 @endsection

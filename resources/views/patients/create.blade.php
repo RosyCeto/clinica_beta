@@ -20,11 +20,13 @@
                 <input type="text" name="nexpedientes" class="form-control" id="nexpedientes" placeholder="Ingrese el número de expediente" required>
             </div>
             
-            <!-- CUI -->
+
             <div class="col-md-4 mb-3">
-                <label for="cui">CUI:</label>
-                <input type="text" name="cui" class="form-control" id="cui" placeholder="Ingrese número de DPI"> <!-- Se eliminó el atributo required -->
-            </div>
+    <label for="cui">CUI:</label>
+    <input type="text" name="cui" class="form-control" id="cui" placeholder="Ingrese número de DPI" minlength="13" maxlength="13" pattern="\d{13}" title="El CUI debe contener exactamente 13 dígitos" required>
+</div>
+
+            
             
             <!-- Primer Nombre -->
             <div class="col-md-4 mb-3">

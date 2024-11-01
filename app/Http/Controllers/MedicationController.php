@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medication;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class MedicationController extends Controller
 {
@@ -16,7 +16,7 @@ class MedicationController extends Controller
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where('nombre', 'LIKE', "%$search%")
-                  ->orWhere('codigo', 'LIKE', "%$search%"); // Cambiado a buscar por código
+                  ->orWhere('codigo', 'LIKE', "%$search%");
         }
 
         // Paginación de 10 elementos
@@ -35,8 +35,8 @@ class MedicationController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
-            'codigo' => 'required|string|max:255', // Validación del nuevo campo
-            'cantidad' => 'required|integer|min:1', // Añadido mínimo 1
+            'codigo' => 'required|string|max:255',
+            'cantidad' => 'required|integer|min:1',
             'fecha_caducidad' => 'required|date'
         ]);
 
@@ -54,8 +54,8 @@ class MedicationController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
-            'codigo' => 'required|string|max:255', // Validación del nuevo campo
-            'cantidad' => 'required|integer|min:1', // Añadido mínimo 1
+            'codigo' => 'required|string|max:255',
+            'cantidad' => 'required|integer|min:1',
             'fecha_caducidad' => 'required|date'
         ]);
 
@@ -73,11 +73,10 @@ class MedicationController extends Controller
         }
     }
 
-    // Método para manejar la entrada de medicamentos
     public function recordEntry(Request $request, Medication $medication)
     {
         $request->validate([
-            'cantidad' => 'required|integer|min:1' // Añadido mínimo 1
+            'cantidad' => 'required|integer|min:1'
         ]);
 
         $medication->increment('cantidad', $request->cantidad);
@@ -85,11 +84,10 @@ class MedicationController extends Controller
         return redirect()->route('medications.index')->with('success', 'Entrada de medicamento registrada correctamente.');
     }
 
-    // Método para manejar la salida de medicamentos
-    public function recordExit(Request $request, Medication $medication)
+    public function handleExit(Request $request, Medication $medication)
     {
         $request->validate([
-            'cantidad' => 'required|integer|min:1' // Añadido mínimo 1
+            'cantidad' => 'required|integer|min:1'
         ]);
 
         if ($medication->cantidad >= $request->cantidad) {
@@ -100,26 +98,37 @@ class MedicationController extends Controller
         }
     }
 
-    public function sale(Request $request)
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+    $medication = Medication::where('nombre', 'like', "%{$query}%")
+        ->orWhere('codigo', 'like', "%{$query}%")
+        ->first(); // Solo buscamos el primer medicamento que coincida
+
+    if ($medication) {
+        return response()->json($medication);
+    } else {
+        return response()->json(['error' => 'Medicamento no encontrado'], 404);
+    }
+}
+
+public function sale(Request $request)
 {
     $request->validate([
         'medication_id' => 'required|exists:medications,id',
         'cantidad' => 'required|integer|min:1',
     ]);
 
-    $medication = Medication::find($request->medication_id);
+    $medication = Medication::findOrFail($request->medication_id);
 
-    // Verificar si hay suficiente cantidad
+    // Verificar si hay suficiente cantidad disponible
     if ($medication->cantidad >= $request->cantidad) {
-        $medication->cantidad -= $request->cantidad;
-        $medication->save();
-
-        return redirect()->route('medications.index')->with('success', 'Salida registrada correctamente.');
+        $medication->decrement('cantidad', $request->cantidad);
+        return redirect()->route('medications.index')->with('success', 'Salida de medicamento registrada correctamente.');
+    } else {
+        return redirect()->route('medications.index')->with('error', 'No hay suficiente cantidad disponible.');
     }
-
-    return redirect()->route('medications.index')->with('error', 'No hay suficiente cantidad disponible.');
 }
 
 
-    
 }

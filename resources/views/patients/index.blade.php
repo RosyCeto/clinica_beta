@@ -62,9 +62,12 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
-                            <a href="{{ route('medical_histories.create', $patient['id']) }}" class="btn btn-primary" title="Historial Médico">
-                                <i class="fas fa-file-medical"></i>
-                            </a>
+                            <!-- Mostrar el botón de Historial Médico solo para roles admin y doctor -->
+    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'doctor')
+        <a href="{{ route('medical_histories.create', $patient['id']) }}" class="btn btn-primary" title="Historial Médico">
+            <i class="fas fa-file-medical"></i>
+        </a>
+    @endif
                         </td>
                     </tr>
                 @empty

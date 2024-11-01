@@ -25,6 +25,9 @@ use App\Http\Controllers\{
     CitaController,
 };
 
+// Ruta para la página de inicio de sesión
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
 // Rutas básicas
 Route::get('/', fn() => view('welcome'));
 
@@ -133,3 +136,13 @@ Route::resource('salidas', SalidaController::class);
 Route::get('/export/salidas', [ReporteController::class, 'exportSalidas'])->name('export.salidas');
 
 Route::get('/eliminar-citas-pasadas', [CitaController::class, 'eliminarPasadas']);
+
+
+// En routes/web.php
+Route::get('/medications/search', [MedicationController::class, 'search'])->name('medications.search');
+
+
+
+Route::post('/medications/{medication}/exit', [MedicationController::class, 'recordExit'])->name('medications.recordExit');
+
+Route::post('/medications/sale', [MedicationController::class, 'sale'])->name('medications.sale');

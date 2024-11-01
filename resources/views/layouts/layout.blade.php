@@ -326,6 +326,14 @@
         <p class="ml-2">Ayuda</p>
     </a>
 </li>
+
+
+<li class="nav-item">
+    <a href="https://drive.google.com/file/d/1lXQcGXTMiWgGJGcff2pI8d_LNazaA-2V/view?usp=sharing" class="nav-link" target="_blank">
+        <i class="nav-icon fas fa-tools text-info"></i>
+        <p class="ml-2">Soporte Técnico</p>
+    </a>
+</li> 
         </ul>
     </nav>
 </aside>

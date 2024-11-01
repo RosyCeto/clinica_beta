@@ -68,7 +68,7 @@ class PatientController extends Controller
             'edad' => 'required|string|max:200',
             'discapacidad' => 'nullable|array',
             'discapacidad.*' => 'string|max:255',
-            'escolaridad' => 'required|in:N/A,preprimaria,primaria,básico,diversificado,universidad,otro',
+            'escolaridad' => 'nullable|in:N/A,preprimaria,primaria,básico,diversificado,universidad,otro',
             'profesion' => 'nullable|string|max:250',
             'telefono' => 'nullable|string|max:8',
             'direccion' => 'nullable|string|max:250',

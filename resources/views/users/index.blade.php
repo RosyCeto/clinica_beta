@@ -5,6 +5,14 @@
 @section('content')
 <div class="container">
     <h1>Lista de Usuarios</h1>
+
+    <!-- Display Flash Messages -->
+    @if(session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <table class="table">
         <thead>
             <tr>
@@ -12,20 +20,30 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
-                <th>Fecha de Registro</th>
+           
                 <th>Foto</th>
                 <th>Status</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                // Mapeo de roles de inglés a español
+                $roleMapping = [
+                    'admin' => 'Administrador',
+                    'doctor' => 'Doctor',
+                    'nurse' => 'Enfermero',
+                    'lab_tech' => 'Laboratorista'
+                ];
+            @endphp
+
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
-                    <td>{{ $user->fecha_registro ? \Carbon\Carbon::parse($user->fecha_registro)->format('d/m/Y') : 'No disponible' }}</td>
+                    <td>{{ $roleMapping[$user->role] ?? 'No disponible' }}</td> <!-- Muestra el rol en español -->
+                    
                     <td>
                         @if($user->foto)
                             <img src="{{ asset('storage/'.$user->foto) }}" alt="Foto de {{ $user->name }}" width="50">
@@ -47,7 +65,7 @@
                         <form action="{{ route('users.toggleStatus', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" class="btn btn-secondary" title="Desactivar/Activar Usuario">
+                            <button type="submit" class="btn btn-secondary" title="Desactivar/Activar Usuario" onclick="return confirm('¿Estás seguro de que deseas cambiar el estado de este usuario?');">
                                 <i class="fas fa-user-slash"></i>
                             </button>
                         </form>
@@ -72,7 +90,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Campos para editar -->
                     <input type="hidden" name="id" id="editUserId">
                     <div class="form-group">
                         <label for="editUserName">Nombre</label>
@@ -108,6 +125,7 @@
 
 <script>
 $(document).ready(function() {
+    // Modal para editar usuario
     $('#editUserModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');
@@ -127,4 +145,3 @@ $(document).ready(function() {
 });
 </script>
 @endsection
-

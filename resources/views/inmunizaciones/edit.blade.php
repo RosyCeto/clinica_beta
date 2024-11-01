@@ -27,13 +27,7 @@
             <label for="paciente_id">Paciente</label>
             <div class="form-row align-items-center">
                 <div class="col">
-                    <select name="paciente_id" class="form-control" required>
-                        @foreach ($pacientes as $paciente)
-                            <option value="{{ $paciente->id }}" {{ $inmunizacion->paciente_id == $paciente->id ? 'selected' : '' }}>
-                                {{ $paciente->primer_nombre }} {{ $paciente->primer_apellido }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="text" id="paciente_nombre" class="form-control" value="{{ $inmunizacion->paciente->primer_nombre }} {{ $inmunizacion->paciente->primer_apellido }}" readonly>
                 </div>
                 <div class="col-auto">
                     <button type="button" class="btn btn-info mt-4" data-toggle="modal" data-target="#buscarPacienteModal">
@@ -108,9 +102,7 @@
                                 <td>
                                     <button class="btn btn-success agregar-paciente" 
                                             data-id="{{ $paciente->id }}" 
-                                            data-cui="{{ $paciente->cui }}" 
-                                            data-nombre="{{ $paciente->primer_nombre }} {{ $paciente->primer_apellido }}" 
-                                            data-edad="{{ $paciente->edad }}">
+                                            data-nombre="{{ $paciente->primer_nombre }} {{ $paciente->primer_apellido }}">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </td>
@@ -138,13 +130,10 @@
             const paciente = $(this).data();
 
             $('#paciente_id').val(paciente.id);
-            $('#paciente_cui').val(paciente.cui);
             $('#paciente_nombre').val(paciente.nombre);
 
             $('#buscarPacienteModal').modal('hide');
             $('.modal-backdrop').remove();
-            $('#search_paciente').val('');
-            $('#patient-table-body tr').show();
         });
 
         $('#search_paciente').on('input', function() {

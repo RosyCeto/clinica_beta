@@ -55,8 +55,11 @@ public function store(Request $request)
         'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
-    $user = new User($request->all());
+    $user = new User();
+    $user->name = $request->name;
+    $user->email = $request->email;
     $user->password = Hash::make($request->password);
+    $user->role = $request->role;
     $user->fecha_registro = Carbon::now();
 
     if ($request->hasFile('foto')) {

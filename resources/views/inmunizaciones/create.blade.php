@@ -70,12 +70,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input type="text" id="search_paciente" class="form-control" placeholder="Buscar por nombre, apellido, CUI, expediente">
+                <input type="text" id="search_paciente" class="form-control" placeholder="Buscar por CUI, nombre o apellido">
                 <br>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>CUI</th>
                             <th>Nombre Completo</th>
                             <th>Edad</th>
@@ -85,7 +84,6 @@
                     <tbody id="patient-table-body">
                         @forelse($pacientes as $paciente)
                             <tr>
-                                <td>{{ $paciente->id }}</td>
                                 <td>{{ $paciente->cui }}</td>
                                 <td>{{ $paciente->primer_nombre }} {{ $paciente->primer_apellido }}</td>
                                 <td>{{ $paciente->edad }}</td>
@@ -120,7 +118,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Manejar el clic en paciente
+
         $(document).on('click', '.agregar-paciente', function(event) {
             event.preventDefault();
             const paciente = $(this).data();
@@ -135,7 +133,7 @@
             $('#patient-table-body tr').show();
         });
 
-        // Filtrar pacientes
+
         $('#search_paciente').on('input', function() {
             const searchValue = $(this).val().toLowerCase();
             $('#patient-table-body tr').filter(function() {
@@ -143,15 +141,13 @@
             });
         });
 
-        // Cargar dosis según vacuna seleccionada
         $('#vacuna_id').on('change', function() {
             let vacunaId = $(this).val();
             
-            // Limpia las opciones actuales en el selector de dosis
             $('#dosis_id').empty().append('<option value="">Seleccione una dosis</option>');
             
             if (vacunaId) {
-                // Llamada AJAX para obtener las dosis correspondientes a la vacuna seleccionada
+
                 $.ajax({
                     url: '{{ route("inmunizaciones.mostrarDosis") }}',
                     type: 'POST',
@@ -160,7 +156,7 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(data) {
-                        // Itera sobre las dosis y añade opciones al selector de dosis
+
                         data.forEach(function(dosis) {
                             $('#dosis_id').append('<option value="' + dosis.id + '">' + dosis.nombre + '</option>');
                         });

@@ -27,21 +27,18 @@ class MedicalHistory extends Model
         'comments',
     ];
 
-    public $timestamps = true; // This is enabled by default
+    public $timestamps = true;
 
     public function patient()
     {
         return $this->belongsTo(Patient::class);
     }
     public function getFullNameAttribute()
-{
+    {
     return "{$this->primer_nombre} {$this->segundo_nombre} {$this->primer_apellido} {$this->segundo_apellido}";
-}
+    }
 public function medicalHistory()
-{
+    {
     return $this->hasMany(MedicalHistory::class);
-}
-
-
-
+    }
 }

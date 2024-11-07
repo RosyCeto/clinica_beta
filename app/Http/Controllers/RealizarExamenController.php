@@ -15,13 +15,13 @@ class RealizarExamenController extends Controller
 
     public function index(Request $request)
 {
-    // Obtener el término de búsqueda desde la solicitud
+   
     $search = $request->input('search');
 
-    // Cargar los exámenes junto con sus relaciones y filtrar según la búsqueda
+  
     $realizarExamenes = RealizarExamen::with(['examen.tipoAnalisis', 'medico', 'paciente', 'usuario'])
         ->when($search, function ($query) use ($search) {
-            // Filtrar por ID, Usuario, Paciente, Médico y Fecha
+          
             $query->where('id', 'like', "%{$search}%")
                   ->orWhereHas('usuario', function ($query) use ($search) {
                       $query->where('name', 'like', "%{$search}%");
@@ -33,43 +33,36 @@ class RealizarExamenController extends Controller
                   ->orWhereHas('medico', function ($query) use ($search) {
                       $query->where('nombre', 'like', "%{$search}%");
                   })
-                  ->orWhereDate('fecha', '=', $search); // Filtrar por fecha exacta
+                  ->orWhereDate('fecha', '=', $search); 
         })
-        ->paginate(10); // Cambia a 10 resultados por página
+        ->paginate(10); 
 
     return view('realizar_examenes.index', compact('realizarExamenes'));
 }
 
-
     public function create()
 {
-    // Fetch all types of analysis
+
     $tipos_analisis = TipoAnalisis::all();
     
-    // Fetch all exams
     $examenes = Examen::all();
     
-    // Use pagination for better data loading
     $medicos = Medico::paginate(10);
     $pacientes = Patient::paginate(10);
     
-    // Return the view with the data
+
     return view('realizar_examenes.create', compact('tipos_analisis', 'examenes', 'medicos', 'pacientes'));
 }
 
-
     public function store(Request $request)
     {
-        // Validar los datos de entrada
+
         $this->validateRequest($request);
 
-        // Verificar si el usuario está autenticado
     if (!Auth::check()) {
         return redirect()->route('login')->with('error', 'Necesitas iniciar sesión para realizar esta acción.');
     }
 
-
-        // Crear un nuevo examen
         RealizarExamen::create([
             'examen_id' => $request->examen_id,
             'usuario_id' => Auth::user()->id,
@@ -84,25 +77,20 @@ class RealizarExamenController extends Controller
 
     public function edit($id)
 {
-    $realizarExamen = RealizarExamen::findOrFail($id); // Asegúrate de que estás utilizando el modelo correcto
-    $examenes = Examen::all(); // Obtén la lista de exámenes
-    $medicos = Medico::all(); // Obtén la lista de médicos
-    $pacientes = Patient::all(); // Obtén la lista de pacientes
-    $tipos_analisis = TipoAnalisis::all(); // Obtén la lista de tipos de análisis
-
-     // Asegúrate de pasar el tipo de análisis del examen que se está editando
+    $realizarExamen = RealizarExamen::findOrFail($id); 
+    $examenes = Examen::all(); 
+    $medicos = Medico::all(); 
+    $pacientes = Patient::all();
+    $tipos_analisis = TipoAnalisis::all(); 
     $tipo_analisis_id = $realizarExamen->tipoAnalisis ? $realizarExamen->tipoAnalisis->id : null;
 
     return view('realizar_examenes.edit', compact('realizarExamen', 'examenes', 'medicos', 'pacientes', 'tipos_analisis'));
 }
 
-
     public function update(Request $request, $id)
     {
-        // Validar los datos de entrada
         $this->validateRequest($request);
 
-        // Actualizar el examen existente
         $realizarExamen = RealizarExamen::findOrFail($id);
         $realizarExamen->update([
             'examen_id' => $request->examen_id,
@@ -126,7 +114,7 @@ class RealizarExamenController extends Controller
     public function searchPacientes(Request $request)
     {
         $query = $request->input('query');
-        // Filtrar pacientes por CUI, primer nombre o primer apellido
+        
         $pacientes = Patient::where('cui', 'LIKE', "%$query%")
             ->orWhere('primer_nombre', 'LIKE', "%$query%")
             ->orWhere('primer_apellido', 'LIKE', "%$query%")
@@ -138,7 +126,7 @@ class RealizarExamenController extends Controller
     public function searchMedicos(Request $request)
     {
         $query = $request->input('query');
-        // Filtrar médicos por CUI o nombre
+      
         $medicos = Medico::where('cui', 'LIKE', "%$query%")
             ->orWhere('nombre', 'LIKE', "%$query%")
             ->get();
@@ -154,12 +142,12 @@ class RealizarExamenController extends Controller
 
     public function mostrarExamenes($usuarioId)
     {
-        // Obtener solo los exámenes del usuario seleccionado
+        
         $realizarExamenes = RealizarExamen::where('usuario_id', $usuarioId)->get();
         return view('tu.vista', compact('realizarExamenes'));
     }
 
-    // Método para validar el request
+    
     private function validateRequest(Request $request)
     {
         $request->validate([
@@ -172,8 +160,8 @@ class RealizarExamenController extends Controller
     }
 
     public function getExamenes($tipo_analisis_id)
-{
+    {
     $examenes = Examen::where('tipo_analisis_id', $tipo_analisis_id)->get();
     return response()->json(['examenes' => $examenes]);
-}
+    }
 }

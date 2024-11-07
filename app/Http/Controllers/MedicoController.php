@@ -73,7 +73,6 @@ class MedicoController extends Controller
         return redirect()->route('medicos.index')->with('success', 'Médico eliminado exitosamente.');
     }
 
-    // Aquí es donde se define el método search
     public function search(Request $request)
     {
         $query = $request->get('query');

@@ -6,7 +6,6 @@
 
 @section('content')
     <style>
-        /* Estilo para el contenedor de bienvenida */
         .welcome-container {
             text-align: center;
             padding: 20px;
@@ -17,7 +16,6 @@
             max-width: 800px;
         }
 
-        /* Título de bienvenida */
         .welcome-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -26,7 +24,7 @@
             line-height: 1.4;
         }
 
-        /* Imagen de bienvenida */
+
         .welcome-image img {
             width: 100%;
             height: auto;
@@ -34,7 +32,6 @@
             box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
         }
 
-        /* Efecto hover para la imagen */
         .welcome-image img:hover {
             transform: scale(1.03);
             transition: transform 0.3s ease;

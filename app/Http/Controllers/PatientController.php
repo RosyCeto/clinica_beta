@@ -14,7 +14,7 @@ class PatientController extends Controller
 {
     $search = $request->query('search');
 
-    // Realiza la consulta de pacientes con búsqueda
+ 
     $patients = Patient::query()
         ->when($search, function ($query) use ($search) {
             $query->where('primer_nombre', 'LIKE', '%' . $search . '%')
@@ -24,12 +24,12 @@ class PatientController extends Controller
                   ->orWhere('cui', 'LIKE', '%' . $search . '%')
                   ->orWhere('nexpedientes', 'LIKE', '%' . $search . '%');
         })
-        ->paginate(10); // Aplica paginación de 10 pacientes por página
+        ->paginate(10); 
 
-    // Verifica si la solicitud es AJAX
+
     if ($request->ajax()) {
         return response()->json([
-            'patients' => $patients->items(), // Obtén los elementos paginados
+            'patients' => $patients->items(),
             'pagination' => [
                 'total' => $patients->total(),
                 'current_page' => $patients->currentPage(),
@@ -44,7 +44,6 @@ class PatientController extends Controller
     return view('patients.index', compact('patients'));
 }
 
-
     public function create()
     {
         $patients = Patient::all();
@@ -53,7 +52,7 @@ class PatientController extends Controller
 
     public function store(Request $request)
     {
-        // Validar los datos de entrada
+
         $request->validate([
             'cui' => 'nullable|string|max:13',
             'nexpedientes' => 'required|string|max:255',
@@ -74,41 +73,36 @@ class PatientController extends Controller
             'direccion' => 'nullable|string|max:250',
         ]);
 
-        // Recolecta los datos del formulario
         $data = $request->all();
 
-        // Asegúrate de que 'segundo_nombre', 'segundo_apellido' y 'apellido_casada' tengan valores por defecto
         $data['segundo_nombre'] = $data['segundo_nombre'] ?? '';
         $data['segundo_apellido'] = $data['segundo_apellido'] ?? '';
         $data['apellido_casada'] = $data['apellido_casada'] ?? '';
 
-        // Asegúrate de que 'discapacidad' sea un string o nulo
         $data['discapacidad'] = isset($data['discapacidad']) && $data['discapacidad'] !== ''
             ? (is_array($data['discapacidad']) ? implode(',', $data['discapacidad']) : $data['discapacidad'])
             : null;
 
-        // Almacenar el paciente
         Patient::create($data);
 
-        // Redireccionar con mensaje de éxito
         return redirect()->route('patients.index')->with('success', 'Paciente creado con éxito.');
     }
 
     public function show(Patient $patient)
     {
-        // Mostrar los detalles de un paciente específico
+      
         return view('patients.show', compact('patient'));
     }
 
     public function edit(Patient $patient)
     {
-        // Mostrar el formulario de edición de un paciente específico
+      
         return view('patients.edit', compact('patient'));
     }
 
     public function update(Request $request, Patient $patient)
 {
-    // Validate the input data
+
     $request->validate([
         'cui' => 'nullable|string|max:13',
         'nexpedientes' => 'required|string|max:255',
@@ -131,10 +125,10 @@ class PatientController extends Controller
 
     $data = $request->all();
 
-    // Check if 'discapacidad' exists and convert it to a comma-separated string if it does
+  
     $data['discapacidad'] = isset($data['discapacidad']) ? implode(',', $data['discapacidad']) : null;
 
-    // Update the patient record
+
     $patient->update($data);
 
     session()->flash('success', 'El paciente ' . $patient->primer_nombre . ' ha sido modificado exitosamente.');
@@ -142,13 +136,11 @@ class PatientController extends Controller
     return redirect()->route('patients.index');
 }
 
-
     public function destroy(Patient $patient)
     {
-        // Eliminar un paciente específico
+
         $patient->delete();
 
-        // Configurar encabezados para evitar caché
         return redirect()->route('patients.index')->with('success', 'Paciente eliminado correctamente')->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
     }
 

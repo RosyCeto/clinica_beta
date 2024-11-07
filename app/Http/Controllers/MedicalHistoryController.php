@@ -8,17 +8,13 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
-
-
 class MedicalHistoryController extends Controller
 {
-
 
     public function index(Request $request)
 {
     $search = $request->input('search');
 
-    // Utiliza una consulta donde manejes los espacios
     $patients = Patient::with('medicalHistories')
         ->where(function ($query) use ($search) {
             $query->where('cui', 'like', "%{$search}%")
@@ -28,7 +24,7 @@ class MedicalHistoryController extends Controller
                     $query->whereDate('created_at', $search);
                 });
         })
-        ->paginate(10); // Asegúrate de que la paginación esté activada
+        ->paginate(10); 
 
     if ($request->ajax()) {
         return view('medical_histories.partials.search_results', compact('patients'))->render();
@@ -36,9 +32,6 @@ class MedicalHistoryController extends Controller
 
     return view('medical_histories.index', compact('patients'));
 }
-
-
-
 
     public function create($patientId)
     {
@@ -53,10 +46,10 @@ class MedicalHistoryController extends Controller
         'type_consult' => 'required|string',
         'consultation_reason' => 'required|string',
         'current_illness_history' => 'required|string',
-        'personal_history' => 'required|string',
-        'family_history' => 'required|string',
-        'habits_history' => 'required|string',
-        'allergies' => 'required|string',
+        'personal_history' => 'nullable|string',  
+        'family_history' => 'nullable|string',   
+        'habits_history' => 'nullable|string',    
+        'allergies' => 'nullable|string',      
         'vital_signs' => 'required|string',
         'weight' => 'required|numeric',
         'height' => 'required|numeric',
@@ -64,28 +57,23 @@ class MedicalHistoryController extends Controller
         'comments' => 'required|string',
     ]);
 
-    // Guardar el historial clínico
     MedicalHistory::create($validatedData);
 
     return redirect()->route('medical_histories.index')->with('success', 'Historial clínico guardado exitosamente.');
 }
 
-
     public function edit($id)
 {
-    // Buscar el historial médico por su ID
     $medicalHistory = MedicalHistory::findOrFail($id);
     
-    // Obtener el paciente asociado a ese historial médico
-    $patient = $medicalHistory->patient; // Asumiendo que la relación está definida en el modelo MedicalHistory
+    $patient = $medicalHistory->patient; 
     
     return view('medical_histories.edit', compact('medicalHistory', 'patient'));
 }
 
-
 public function update(Request $request, $id)
 {
-    // Validate the fields
+
     $validated = $request->validate([
         'patient_id' => 'required|exists:patients,id',
         'type_consult' => 'required|in:primera consulta,consulta general',
@@ -102,18 +90,16 @@ public function update(Request $request, $id)
         'comments' => 'required|string',
     ]);
 
-    // Actualiza el historial médico
     $medicalHistory = MedicalHistory::findOrFail($id);
     $medicalHistory->update($validated);
 
-    // Redirigir con mensaje de éxito
+ 
     return redirect()->route('medical_histories.index')->with('success', 'Historial clínico actualizado exitosamente.');
 }
 
-
     public function destroy($id)
     {
-        // Elimina un historial médico existente
+
         $medicalHistory = MedicalHistory::findOrFail($id);
         $medicalHistory->delete();
 
@@ -121,20 +107,22 @@ public function update(Request $request, $id)
     }
 
     public function showPdf($id) {
-        // Obtener el historial médico específico por ID
+ 
         $medicalHistory = MedicalHistory::findOrFail($id);
-    
-        // Encontrar el paciente asociado al historial médico
         $patient = $medicalHistory->patient;
     
-        // Cargar la vista para el PDF
+        $firstConsultation = MedicalHistory::where('patient_id', $patient->id)
+                                           ->where('type_consult', 'primera consulta') 
+                                           ->first();
+    
+      
         $pdf = Pdf::loadView('medical_histories.pdf', [
             'patient' => $patient,
             'medicalHistory' => $medicalHistory,
+            'firstConsultation' => $firstConsultation, 
         ]);
-    
-        // Retornar el PDF
+        
+
         return $pdf->download('historial_medico_' . $patient->full_name . '.pdf');
     }
-    
 }

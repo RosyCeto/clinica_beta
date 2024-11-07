@@ -28,12 +28,11 @@ return new class extends Migration
         $table->enum('escolaridad', ['N/A', 'preprimaria', 'primaria', 'basico', 'diversificado', 'universidad', 'otro']); 
         $table->string('profesion', 250)->nullable();
         $table->string('telefono', 8)->nullable(); 
-        $table->text('direccion')->nullable(); // Cambiar a text si es necesario
+        $table->text('direccion')->nullable();
         $table->timestamps(); 
     });
 }
 
-    
     public function down(): void
     {
         Schema::dropIfExists('patients');

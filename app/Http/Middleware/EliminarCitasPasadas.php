@@ -9,7 +9,6 @@ class EliminarCitasPasadas
 {
     public function handle($request, Closure $next)
     {
-        // Eliminar citas pasadas
         Cita::where('fecha', '<', now())->delete();
         
         return $next($request);

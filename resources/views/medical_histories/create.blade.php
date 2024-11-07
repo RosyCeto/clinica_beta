@@ -54,7 +54,7 @@
             <!-- Tipo de consulta -->
             <div class="mb-3">
                 <label for="type_consult" class="form-label" style="color: #007bff;">Tipo de Consulta</label>
-                <select name="type_consult" class="form-select" required>
+                <select id="type_consult" name="type_consult" class="form-select" required>
                     <option value="primera consulta">Primera Consulta</option>
                     <option value="consulta general">Consulta General</option>
                 </select>
@@ -72,41 +72,43 @@
                 <textarea id="current_illness_history" name="current_illness_history" class="form-control" rows="3" required>{{ old('current_illness_history') }}</textarea>
             </div>
 
-            <h5 class="text-secondary" style="color: #007bff;">Antecedentes</h5>
-            <table class="table table-bordered table-hover">
-                <thead class="table-primary">
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Medicos</td>
-                        <td>
-                            <textarea id="personal_history" name="personal_history" class="form-control" rows="2" required>{{ old('personal_history') }}</textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Quirúrgicos</td>
-                        <td>
-                            <textarea id="family_history" name="family_history" class="form-control" rows="2" required>{{ old('family_history') }}</textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vicios y Manías</td>
-                        <td>
-                            <textarea id="habits_history" name="habits_history" class="form-control" rows="2" required>{{ old('habits_history') }}</textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Alergias</td>
-                        <td>
-                            <textarea id="allergies" name="allergies" class="form-control" rows="2" required>{{ old('allergies') }}</textarea>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="antecedents-section" style="display: none;">
+                <h5 class="text-secondary" style="color: #007bff;">Antecedentes</h5>
+                <table class="table table-bordered table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Medicos</td>
+                            <td>
+                                <textarea id="personal_history" name="personal_history" class="form-control" rows="2">{{ old('personal_history') }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Quirúrgicos</td>
+                            <td>
+                                <textarea id="family_history" name="family_history" class="form-control" rows="2">{{ old('family_history') }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vicios y Manías</td>
+                            <td>
+                                <textarea id="habits_history" name="habits_history" class="form-control" rows="2">{{ old('habits_history') }}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alergias</td>
+                            <td>
+                                <textarea id="allergies" name="allergies" class="form-control" rows="2">{{ old('allergies') }}</textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h5 class="text-secondary" style="color: #007bff;">Examen Físico</h5>
             <table class="table table-bordered table-hover">
@@ -164,9 +166,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        $('form').on('submit', function(event) {
-            console.log("Formulario enviado");
-            $(this).find(':submit').attr('disabled', 'disabled');
+        $(document).ready(function() {
+            $('#type_consult').change(function() {
+                if ($(this).val() === 'primera consulta') {
+                    $('#antecedents-section').show();
+                } else {
+                    $('#antecedents-section').hide();
+                    
+                    $('#personal_history').val('');
+                    $('#family_history').val('');
+                    $('#habits_history').val('');
+                    $('#allergies').val('');
+                }
+            });
+
+          
+            if ($('#type_consult').val() === 'primera consulta') {
+                $('#antecedents-section').show();
+            } else {
+                $('#antecedents-section').hide();
+            }
         });
     </script>
 @endsection

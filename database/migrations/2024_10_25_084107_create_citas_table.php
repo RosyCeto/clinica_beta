@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('paciente_id')->constrained('patients')->onDelete('cascade'); // Asegúrate de que el nombre de la tabla sea 'patients'
-            $table->foreignId('medico_id')->constrained('medicos')->onDelete('cascade'); // Verifica que 'medicos' sea el nombre correcto
+            $table->foreignId('paciente_id')->constrained('patients')->onDelete('cascade'); 
+            $table->foreignId('medico_id')->constrained('medicos')->onDelete('cascade'); 
             $table->dateTime('fecha');
             $table->string('status')->default('pendiente');
             $table->timestamps();

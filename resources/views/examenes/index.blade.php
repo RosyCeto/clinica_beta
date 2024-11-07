@@ -58,7 +58,6 @@
     <table class="table table-striped table-bordered shadow-sm">
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Tipo de Análisis</th>
                 <th>Acciones</th>
@@ -67,7 +66,6 @@
         <tbody>
             @foreach ($examenes as $examen)
                 <tr>
-                    <td>{{ $examen->id }}</td>
                     <td>{{ $examen->nombre }}</td>
                     <td>{{ $examen->tipoAnalisis->nombre }}</td>
                     <td>
@@ -164,7 +162,7 @@
 </div>
 
 <script>
-    // Precargar los datos del examen en el modal de edición
+   
     $(document).ready(function() {
         $(document).on('click', '.btn-edit', function() {
             var id = $(this).data('id');
@@ -179,9 +177,9 @@
         });
     });
 
-    // Confirmación de eliminación con SweetAlert
+
     function confirmDelete(event) {
-        event.preventDefault(); // Evitar el envío automático del formulario
+        event.preventDefault();
         Swal.fire({
             title: '¿Estás seguro de que deseas eliminar este examen?',
             text: "Esta acción no se puede deshacer.",
@@ -193,7 +191,7 @@
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                event.target.submit(); // Envía el formulario si el usuario confirma
+                event.target.submit(); 
             }
         });
     }

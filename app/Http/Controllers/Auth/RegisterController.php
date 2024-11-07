@@ -7,13 +7,13 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request; // Asegúrate de importar esta clase
+use Illuminate\Http\Request; 
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     public function __construct()
     {
@@ -38,12 +38,11 @@ class RegisterController extends Controller
         'name' => $data['name'],
         'email' => $data['email'],
         'password' => Hash::make($data['password']),
-        'role' => $data['role'], // Agrega esta línea para asignar el rol
+        'role' => $data['role'], 
     ]);
 }
 
 
-    // Agrega este método para manejar la redirección después del registro
     protected function registered(Request $request, User $user)
 {
     switch ($user->role) {
@@ -56,9 +55,7 @@ class RegisterController extends Controller
         case 'lab_tech':
             return redirect()->route('lab.tech.dashboard');
         default:
-            return redirect('/home');
+            return redirect('/login');
     }
+  }
 }
-
-}
-

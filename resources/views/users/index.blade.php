@@ -16,7 +16,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
@@ -28,7 +27,7 @@
         </thead>
         <tbody>
             @php
-                // Mapeo de roles de inglés a español
+               
                 $roleMapping = [
                     'admin' => 'Administrador',
                     'doctor' => 'Doctor',
@@ -39,7 +38,6 @@
 
             @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $roleMapping[$user->role] ?? 'No disponible' }}</td> <!-- Muestra el rol en español -->
@@ -125,7 +123,7 @@
 
 <script>
 $(document).ready(function() {
-    // Modal para editar usuario
+   
     $('#editUserModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = button.data('id');

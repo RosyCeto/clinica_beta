@@ -9,8 +9,6 @@ class Laboratory extends Model
 {
     use HasFactory;
 
-
-    // Relación inversa: cada laboratorio pertenece a un paciente
     public function patient()
     {
         return $this->belongsTo(Patient::class);

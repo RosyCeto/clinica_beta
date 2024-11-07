@@ -32,7 +32,7 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
-        return $this->role === $role; // Verifica que 'role' sea el nombre correcto del campo
+        return $this->role === $role; 
     }
 
 

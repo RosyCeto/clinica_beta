@@ -23,7 +23,7 @@
 
             <div class="col-md-4 mb-3">
     <label for="cui">CUI:</label>
-    <input type="text" name="cui" class="form-control" id="cui" placeholder="Ingrese número de DPI" minlength="13" maxlength="13" pattern="\d{13}" title="El CUI debe contener exactamente 13 dígitos" required>
+    <input type="text" name="cui" class="form-control" id="cui" placeholder="Ingrese número de DPI" minlength="13" maxlength="13" pattern="\d{13}" title="El CUI debe contener exactamente 13 dígitos">
 </div>
 
             
@@ -149,7 +149,7 @@
         var edadMeses = hoy.getMonth() - nacimiento.getMonth();
         var edadDias = hoy.getDate() - nacimiento.getDate();
 
-        // Ajustar los meses y días si es necesario
+        
         if (edadDias < 0) {
             edadMeses--;
             edadDias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
@@ -160,10 +160,10 @@
             edadMeses += 12;
         }
 
-        // Formatear la edad como "X años, Y meses, Z días"
+        
         var edadCompleta = edadAnios + " años, " + edadMeses + " meses, " + edadDias + " días";
 
-        // Mostrar la edad en el campo correspondiente
+       
         document.getElementById("edad").value = edadCompleta;
     }
 </script>
@@ -285,12 +285,12 @@
             const query = this.value;
             const resultsContainer = document.getElementById('contact-results');
 
-            if (query.length > 2) { // Comenzar a buscar después de 2 caracteres
+            if (query.length > 2) { 
                 fetch(/patients/search?query=${query})
                     .then(response => response.json())
                     .then(data => {
-                        resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
-                        resultsContainer.style.display = 'block'; // Mostrar la lista de resultados
+                        resultsContainer.innerHTML = ''; 
+                        resultsContainer.style.display = 'block'; 
 
                         data.forEach(patient => {
                             const li = document.createElement('li');
@@ -299,17 +299,17 @@
                             li.dataset.id = patient.id;
 
                             li.addEventListener('click', function() {
-                                document.getElementById('contact-search').value = patient.full_name; // Mostrar nombre en el input
-                                document.getElementById('contact_id').value = patient.id; // Guardar el ID del contacto
-                                resultsContainer.style.display = 'none'; // Ocultar resultados
+                                document.getElementById('contact-search').value = patient.full_name; 
+                                document.getElementById('contact_id').value = patient.id; 
+                                resultsContainer.style.display = 'none'; 
                             });
 
                             resultsContainer.appendChild(li);
                         });
                     });
             } else {
-                resultsContainer.innerHTML = ''; // Limpiar resultados si la consulta es muy corta
-                resultsContainer.style.display = 'none'; // Ocultar resultados
+                resultsContainer.innerHTML = ''; 
+                resultsContainer.style.display = 'none'; 
             }
         });
     </script>

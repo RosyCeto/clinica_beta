@@ -12,9 +12,9 @@ class CreateSessionsTable extends Migration
             $table->string('id')->unique();
             $table->text('payload');
             $table->integer('last_activity');
-            $table->unsignedBigInteger('user_id')->nullable(); // Asegúrate de que esta línea esté presente
-            $table->string('ip_address')->nullable(); // Opcional
-            $table->text('user_agent')->nullable(); // Opcional
+            $table->unsignedBigInteger('user_id')->nullable(); 
+            $table->string('ip_address')->nullable(); 
+            $table->text('user_agent')->nullable(); 
         });
     }
 

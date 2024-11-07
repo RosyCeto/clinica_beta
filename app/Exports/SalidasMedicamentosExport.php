@@ -10,7 +10,7 @@ class SalidasMedicamentosExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        return Salida::with('medication')->get(); // Asegúrate de incluir la relación
+        return Salida::with('medication')->get(); 
     }
 
     public function headings(): array
@@ -28,10 +28,10 @@ class SalidasMedicamentosExport implements FromCollection, WithHeadings
     {
         return [
             $salida->id,
-            $salida->medication->nombre ?? 'N/A', // Mostrar nombre del medicamento
-            $salida->medication->codigo ?? 'N/A', // Mostrar código del medicamento
+            $salida->medication->nombre ?? 'N/A', 
+            $salida->medication->codigo ?? 'N/A',
             $salida->cantidad,
-            $salida->fecha_salida->format('d-m-Y'), // Formato de fecha
+            $salida->fecha_salida->format('d-m-Y'), 
         ];
     }
 }

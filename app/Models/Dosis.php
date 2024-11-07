@@ -11,12 +11,11 @@ class Dosis extends Model
 
     protected $fillable = [
         'nombre',
-        'vacuna_id', // Asegúrate de que coincide con la columna en la tabla
+        'vacuna_id', 
     ];
 
-    protected $table = 'dosis';  // Asegúrate de que apunta a la tabla correcta
+    protected $table = 'dosis';  
 
-    // Relación con Vacuna
     public function vacuna()
     {
         return $this->belongsTo(Vacuna::class, 'vacuna_id');

@@ -2,7 +2,6 @@
     <table class="table table-bordered">
         <thead class="table-light">
             <tr>
-                <th>ID</th>
                 <th>CUI</th>
                 <th>N° Expediente</th>
                 <th>Nombre Completo</th>
@@ -15,7 +14,6 @@
             @foreach($patients as $patient)
                 @foreach($patient->medicalHistories as $history)
                     <tr>
-                        <td>{{ $patient->id }}</td>
                         <td>{{ $patient->cui }}</td>
                         <td>{{ $patient->nexpedientes }}</td>
                         <td>{{ $patient->primer_nombre }} {{$patient->segundo_nombre}} {{ $patient->primer_apellido }} {{ $patient->segundo_apellido }}</td>
@@ -53,7 +51,7 @@
 
     <script>
         function confirmDelete(event) {
-            event.preventDefault(); // Evitar el envío automático del formulario
+            event.preventDefault(); 
 
             Swal.fire({
                 title: '¿Está seguro que quiere eliminar este registro de historia médica?',
@@ -66,7 +64,7 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    event.target.submit(); // Envía el formulario si el usuario confirma
+                    event.target.submit();
                 }
             });
         }

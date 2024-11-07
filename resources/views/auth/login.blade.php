@@ -3,21 +3,21 @@
 @section('content')
 <style>
     .card-body {
-        background-color: white; /* Fondo blanco para el contenido del formulario */
+        background-color: white; 
     }
     .form-label {
-        color: black; /* Color del texto de las etiquetas */
+        color: black; 
     }
     .form-control {
-        background-color: white; /* Fondo blanco para los inputs */
-        color: black; /* Color del texto de los inputs */
+        background-color: white; 
+        color: black; 
     }
     .form-control:focus {
-        background-color: white; /* Mantener fondo blanco al hacer foco en el input */
-        border-color: #007bff; /* Color del borde al enfocar */
+        background-color: white; 
+        border-color: #007bff; 
     }
     .custom-container {
-        max-width: 400px; /* Ancho máximo del contenedor */
+        max-width: 400px; 
     }
 </style>
 <div class="container">

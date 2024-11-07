@@ -11,16 +11,15 @@ class Inmunizacion extends Model
 
     protected $table = 'inmunizaciones';
 
-    // Define los campos que se pueden asignar masivamente
+    
     protected $fillable = ['paciente_id', 'vacuna_id', 'dosis_id', 'fecha_vacunacion'];
 
-    // Asegurarse de que 'fecha_vacunacion' se trate como una fecha
+   
     protected $casts = [
-        'fecha_vacunacion' => 'date', // Esto convierte automáticamente el string a un objeto Carbon
+        'fecha_vacunacion' => 'date', 
     ];
 
 
-    // Relaciones
     public function paciente()
     {
         return $this->belongsTo(Patient::class);

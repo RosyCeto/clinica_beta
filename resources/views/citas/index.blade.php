@@ -20,7 +20,6 @@
         <table class="table table-bordered table-striped table-hover">
             <thead class="bg-primary text-white">
                 <tr>
-                    <th>ID</th>
                     <th>Paciente</th>
                     <th>Médico</th>
                     <th>Fecha</th>
@@ -31,7 +30,6 @@
             <tbody>
                 @foreach ($citas as $cita)
                     <tr>
-                        <td>{{ $cita->id }}</td>
                         <td>{{ $cita->paciente ? $cita->paciente->primer_nombre . ' ' . $cita->paciente->primer_apellido : 'No asignado' }}</td>
                         <td>{{ $cita->medico ? $cita->medico->nombre : 'No asignado' }}</td>
                         <td>{{ \Carbon\Carbon::parse($cita->fecha)->format('d/m/Y H:i') }}</td>

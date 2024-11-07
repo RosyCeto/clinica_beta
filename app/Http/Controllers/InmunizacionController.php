@@ -14,7 +14,6 @@ class InmunizacionController extends Controller
 {
     $search = $request->input('search');
 
-    // Filtra por búsqueda y paginación
     $inmunizaciones = Inmunizacion::with(['paciente', 'vacuna', 'dosis'])
         ->when($search, function ($query) use ($search) {
             $query->where('id', 'like', "%{$search}%")
@@ -26,9 +25,7 @@ class InmunizacionController extends Controller
                       $query->where('nombre', 'like', "%{$search}%");
                   });
         })
-        ->paginate(10); // Cambia a 10 resultados por página
-
-        
+        ->paginate(10);
 
     return view('inmunizaciones.index', compact('inmunizaciones'));
 }

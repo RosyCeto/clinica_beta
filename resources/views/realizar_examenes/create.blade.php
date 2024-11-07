@@ -97,12 +97,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input type="text" id="search_paciente" class="form-control" placeholder="Buscar por nombre, apellido, CUI, expediente">
+                <input type="text" id="search_paciente" class="form-control" placeholder="Buscar por CUI, nombre o apellido">
                 <br>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>CUI</th>
                             <th>Nombre Completo</th>
                             <th>Edad</th>
@@ -112,7 +111,6 @@
                     <tbody id="patient-table-body">
                         @forelse($pacientes as $paciente)
                             <tr>
-                                <td>{{ $paciente->id }}</td>
                                 <td>{{ $paciente->cui }}</td>
                                 <td>{{ $paciente->primer_nombre }} {{ $paciente->primer_apellido }}</td>
                                 <td>{{ $paciente->edad }}</td>
@@ -159,7 +157,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>CUI</th>
                             <th>Nombre Completo</th>
                             <th>Acciones</th>
@@ -168,7 +165,6 @@
                     <tbody id="medico-table-body">
                         @forelse($medicos as $medico)
                             <tr>
-                                <td>{{ $medico->id }}</td>
                                 <td>{{ $medico->cui }}</td>
                                 <td>{{ $medico->nombre }}</td>
                                 <td>
@@ -199,7 +195,7 @@
 <!-- JavaScript para Manejo de Búsqueda -->
 <script>
     $(document).ready(function() {
-        // Función para buscar pacientes
+       
         $('#search_paciente').on('keyup', function() {
             var value = $(this).val().toLowerCase();
             $('#patient-table-body tr').filter(function() {
@@ -207,7 +203,6 @@
             });
         });
 
-        // Función para buscar médicos
         $('#search_medico').on('keyup', function() {
             var value = $(this).val().toLowerCase();
             $('#medico-table-body tr').filter(function() {
@@ -216,8 +211,6 @@
         });
     
         
-    
-        // Manejar el clic en paciente
         $(document).on('click', '.agregar-paciente', function(event) {
             event.preventDefault();
             const paciente = $(this).data();
@@ -230,7 +223,7 @@
             $('.modal-backdrop').remove();
         });
     
-        // Manejar el clic en médico
+
         $(document).on('click', '.agregar-medico', function(event) {
             event.preventDefault();
             const medico = $(this).data();
@@ -243,7 +236,7 @@
             $('.modal-backdrop').remove();
         });
     
-        // Manejar el cambio de tipo de análisis y filtrar exámenes
+
         $('#tipo_analisis_id').on('change', function() {
             let tipoAnalisisId = this.value;
             fetch(`/search/examenes?tipo_analisis_id=${tipoAnalisisId}`)
@@ -257,8 +250,6 @@
                     });
                 });
         });
-    });
-    
-    
+    });  
             </script>
             @endsection

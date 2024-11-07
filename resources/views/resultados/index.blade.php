@@ -23,7 +23,7 @@
     <!-- Formulario de Búsqueda -->
     <form action="{{ route('resultados.index') }}" method="GET" class="mb-3">
         <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Buscar por ID, Usuario, Paciente, Médico o Fecha" value="{{ request()->input('search') }}">
+            <input type="text" name="search" class="form-control" placeholder="Buscar por Usuario, Paciente, Médico o Fecha" value="{{ request()->input('search') }}">
             <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Buscar</button>
             </div>
@@ -39,7 +39,6 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Usuario</th>
                 <th>Paciente</th>
                 <th>Médico</th>
@@ -51,7 +50,6 @@
         <tbody>
             @forelse ($realizarExamenes as $examen)
                 <tr>
-                    <td>{{ $examen->id }}</td>
                     <td>{{ $examen->usuario->name }}</td>
                     <td>{{ $examen->paciente->primer_nombre }} {{ $examen->paciente->primer_apellido }}</td>
                     <td>{{ $examen->medico->nombre }}</td>
@@ -94,14 +92,14 @@
 
 <style>
     .table th {
-        background-color: #343a40; /* Cambiar color de encabezado a un gris oscuro */
-        color: #ffffff; /* Cambiar color de texto a blanco */
+        background-color: #343a40; 
+        color: #ffffff; 
     }
     .badge {
-        font-size: 0.9rem; /* Tamaño de fuente más pequeño para badges */
+        font-size: 0.9rem; 
     }
     .alert {
-        margin-top: 20px; /* Espaciado entre alertas y contenido */
+        margin-top: 20px; 
     }
 </style>
 @endsection

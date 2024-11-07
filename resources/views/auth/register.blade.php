@@ -3,62 +3,61 @@
 @section('content')
 <style>
     body {
-        background-color: #f8f9fa; /* Color de fondo general */
-    }
+        background-color: #f8f9fa; 
 
     .custom-container {
-        max-width: 400px; /* Ancho máximo del contenedor */
-        margin-top: 20px; /* Espacio superior */
-        text-align: center; /* Centrar el texto dentro del contenedor */
-        border-radius: 12px; /* Bordes redondeados */
-        overflow: hidden; /* Para asegurar que los bordes redondeados se mantengan */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+        max-width: 400px; 
+        margin-top: 20px; 
+        text-align: center; 
+        border-radius: 12px; 
+        overflow: hidden; 
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
     }
 
     .logo-image {
-        margin: 20px 0; /* Espacio entre el logo y el contenedor del formulario */
-        width: 150px; /* Ajustar el ancho del logo */
+        margin: 20px 0; 
+        width: 150px; 
     }
 
     .card-body {
-        background-color: white; /* Fondo blanco para el contenido del formulario */
-        border: none; /* Sin borde */
-        padding: 30px; /* Espacio interno */
+        background-color: white; 
+        border: none;
+        padding: 30px; 
     }
 
     .form-label {
-        color: #333; /* Color del texto de las etiquetas */
-        font-weight: bold; /* Negrita para las etiquetas */
+        color: #333; 
+        font-weight: bold; 
     }
 
     .form-control {
-        background-color: #f1f1f1; /* Fondo claro para los inputs */
-        border: 1px solid #ccc; /* Borde gris */
-        border-radius: 5px; /* Bordes redondeados en los inputs */
-        transition: border-color 0.3s; /* Transición suave para el color del borde */
+        background-color: #f1f1f1; 
+        border: 1px solid #ccc;
+        border-radius: 5px; 
+        transition: border-color 0.3s; 
     }
 
     .form-control:focus {
-        background-color: white; /* Fondo blanco al enfocar en el input */
-        border-color: #007bff; /* Color del borde al enfocar */
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ligera al enfocar */
-        outline: none; /* Sin contorno */
+        background-color: white; 
+        border-color: #007bff; 
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+        outline: none; 
     }
 
     .btn-primary {
-        background-color: #007bff; /* Color del botón */
-        border-color: #007bff; /* Color del borde del botón */
-        border-radius: 5px; /* Bordes redondeados en el botón */
-        width: 100%; /* Botón ocupa todo el ancho */
+        background-color: #007bff; 
+        border-color: #007bff; 
+        border-radius: 5px; 
+        width: 100%; 
     }
 
     .btn-primary:hover {
-        background-color: #0056b3; /* Color del botón al pasar el ratón */
-        border-color: #0056b3; /* Color del borde al pasar el ratón */
+        background-color: #0056b3; 
+        border-color: #0056b3; 
     }
 
     .invalid-feedback {
-        display: block; /* Asegura que los mensajes de error sean visibles */
+        display: block; 
     }
 </style>
 
@@ -126,6 +125,10 @@
                             </button>
                         </div>
                     </div>
+                    <!-- Enlace a la página de inicio de sesión -->
+                    <a href="{{ route('login') }}" class="login-link">
+                        ¿Ya tienes cuenta? Inicia sesión aquí
+                    </a>
                 </form>
             </div>
         </div>

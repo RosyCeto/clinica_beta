@@ -10,7 +10,7 @@ class SalidaController extends Controller
 {
     public function create()
     {
-        $medications = Medication::all(); // Obtener todos los medicamentos
+        $medications = Medication::all(); 
         return view('salidas.create', compact('medications'));
     }
 
@@ -27,14 +27,12 @@ class SalidaController extends Controller
             return back()->with('error', 'No hay suficiente cantidad disponible.');
         }
 
-        // Registrar la salida
         Salida::create([
             'medication_id' => $request->medication_id,
             'cantidad' => $request->cantidad,
             'fecha_salida' => $request->fecha_salida,
         ]);
 
-        // Restar la cantidad de medicamentos
         $medication->cantidad -= $request->cantidad;
         $medication->save();
 

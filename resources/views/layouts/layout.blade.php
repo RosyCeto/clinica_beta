@@ -36,6 +36,12 @@
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
+<!-- Bootstrap CSS (versión 5) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUa0xA50M6aayF8KXb1W6E2UFDwb/dzYtCQ9y+gl5Jp2QOL8WLMs1gBkxC32" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-FnmD1t0hZyHX5I1Rt68yoXoqYPVtf/MU6zZp/PRshZAFMKCk75/e7AeplKw/pV6g" crossorigin="anonymous">
+
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -77,11 +83,7 @@
         <a href="{{ route('citas.index') }}" class="dropdown-item dropdown-footer" style="font-size: 0.9rem;">Ver todas las citas</a>
     </div>
 </li>
-
-
-
-
-                
+        
                 <!-- User Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -110,9 +112,7 @@
                             </a>
                         @endif
                     </div>
-                </li>
-                
-                
+                </li>    
 
             </ul>
         </nav>
@@ -334,13 +334,11 @@
         <p class="ml-2">Soporte Técnico</p>
     </a>
 </li> 
+
+
         </ul>
     </nav>
 </aside>
-
-
-
-
 
         <!-- Contenido Principal -->
         <div class="content-wrapper">
@@ -361,22 +359,34 @@
             </div>
         </div>
 
-        <!-- Footer -->
-<footer class="main-footer" style="padding: 5px 10px; font-size: 12px;">
-    <div class="d-flex align-items-center">
-        <div class="mr-2">
-            <img src="{{ asset('plantilla/dist/img/UMG.png') }}" alt="Logo UMG" style="max-height: 30px;">
+
+
+         <!-- Footer -->
+    <footer class="main-footer d-flex justify-content-between align-items-center" style="padding: 5px 10px; font-size: 12px;">
+        <div class="d-flex align-items-center">
+            <div class="mr-2">
+                <img src="{{ asset('plantilla/dist/img/UMG.png') }}" alt="Logo UMG" style="max-height: 30px;">
+            </div>
+            <div>
+                <strong>Proyecto de Graduación 2024</strong> | 
+                <span>Universidad Mariano Gálvez</span>
+            </div>
         </div>
-        <div>
-            <strong>Proyecto de Graduación 2024</strong> | 
-            <span>Universidad Mariano Gálvez</span>
+        <div class="ms-auto text-end" style="text-align: right; font-size: 14px; color: #333;">
+            <div style="display: flex; justify-content: flex-end;">
+                <strong>Autora:</strong> Rossy Esther Ceto Pérez &nbsp;&nbsp;
+                <strong>Email:</strong> 
+                <a href="mailto:ctoprossy506@gmail.com" style="color: #0056b3; text-decoration: underline; margin-left: 5px;">
+                    <i class="fas fa-envelope" style="font-size: 16px;"></i>
+                </a>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <strong>Sistema:</strong> Medisoft &nbsp;&nbsp;
+                <strong>Versión:</strong> 1.0.0
+            </div>
         </div>
-    </div>
-</footer>
-
-
-
-
+        
+    </footer>
         
 
     <!-- Bootstrap 4 -->
@@ -393,6 +403,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Bootstrap JS (versión 5) y dependencias -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoC3q2XA/NG9lfEytD8PoNlHG9/cRxjZZl6Yk4fNwFLFL+K" crossorigin="anonymous"></script>
 
 
 </body>

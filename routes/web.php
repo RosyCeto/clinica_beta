@@ -141,8 +141,5 @@ Route::get('/eliminar-citas-pasadas', [CitaController::class, 'eliminarPasadas']
 // En routes/web.php
 Route::get('/medications/search', [MedicationController::class, 'search'])->name('medications.search');
 
-
-
-Route::post('/medications/{medication}/exit', [MedicationController::class, 'recordExit'])->name('medications.recordExit');
-
-Route::post('/medications/sale', [MedicationController::class, 'sale'])->name('medications.sale');
+Route::post('/medications/exit', [MedicationController::class, 'recordExit']);
+Route::post('/medications/{medication}/exit', [MedicationController::class, 'recordExit'])->name('medications.exit');

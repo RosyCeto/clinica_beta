@@ -8,7 +8,6 @@ class NurseController extends Controller
 {
     public function index()
     {
-        // Lógica para mostrar la vista de enfermeras
-        return view('nurses.index'); // Ajusta la vista según tu estructura de carpetas
+        return view('nurses.index'); 
     }
 }

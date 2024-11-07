@@ -10,11 +10,11 @@ class HistorialClinicoExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        // Obtener todos los historiales clínicos y añadir el nombre del paciente
+
         return MedicalHistory::with('patient')->get()->map(function ($historial) {
             return [
-                'nombre_paciente' => $historial->patient->primer_nombre, // Primer nombre del paciente
-                'apellido_paciente' => $historial->patient->primer_apellido, // Primer apellido del paciente
+                'nombre_paciente' => $historial->patient->primer_nombre, 
+                'apellido_paciente' => $historial->patient->primer_apellido, 
                 'tipo_consulta' => $historial->type_consult,
                 'motivo_consulta' => $historial->consultation_reason,
                 'historia_enfermedad_actual' => $historial->current_illness_history,
@@ -35,21 +35,21 @@ class HistorialClinicoExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Nombre del Paciente', // 'nombre_paciente'
-            'Apellido del Paciente', // 'apellido_paciente'
-            'Tipo de Consulta', // 'tipo_consulta'
-            'Motivo de Consulta', // 'motivo_consulta'
-            'Historia de Enfermedad Actual', // 'historia_enfermedad_actual'
-            'Antecedentes Personales', // 'antecedentes_personales'
-            'Antecedentes Familiares', // 'antecedentes_familiares'
-            'Historia de Hábitos', // 'historia_habitos'
-            'Alergias', // 'alergias'
-            'Examen Físico', // 'examen_fisico'
-            'Signos Vitales', // 'signos_vitales'
-            'Peso', // 'peso'
-            'Altura', // 'altura'
-            'Diagnóstico y Tratamiento', // 'diagnostico_tratamiento'
-            'Comentarios', // 'comentarios'
+            'Nombre del Paciente', 
+            'Apellido del Paciente', 
+            'Tipo de Consulta', 
+            'Motivo de Consulta', 
+            'Historia de Enfermedad Actual', 
+            'Antecedentes Personales', 
+            'Antecedentes Familiares', 
+            'Historia de Hábitos', 
+            'Alergias', 
+            'Examen Físico', 
+            'Signos Vitales', 
+            'Peso', 
+            'Altura', 
+            'Diagnóstico y Tratamiento', 
+            'Comentarios', 
         ];
     }
 }

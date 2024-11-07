@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('resultados_laboratorio', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('realizar_examen_id');
-            $table->string('archivo');  // Añadir el campo de archivo
+            $table->string('archivo');  
             $table->text('comentarios')->nullable();
             $table->timestamp('fecha_registro')->useCurrent();
             $table->enum('estado', ['pendiente', 'finalizado'])->default('pendiente');

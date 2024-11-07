@@ -22,11 +22,11 @@ class Authenticate
             if (Auth::guard($guard)->check()) {
                 $user = Auth::guard($guard)->user();
 
-                // Verificar si el usuario está desactivado
+             
                 if ($user->status) {
                     return $next($request);
                 } else {
-                    // Si el usuario está desactivado, cerrar sesión y redirigir
+                    
                     Auth::guard($guard)->logout();
                     return redirect()->route('login')
                         ->with('error', 'Tu cuenta ha sido desactivada. Contacte al administrador.')
@@ -35,7 +35,6 @@ class Authenticate
             }
         }
 
-        // Si no hay ningún usuario autenticado, redirigir al login
         return redirect()->route('login')
             ->with('error', 'Debes iniciar sesión para acceder a esta página.')
             ->setStatusCode(403);

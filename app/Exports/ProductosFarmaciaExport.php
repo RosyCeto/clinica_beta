@@ -10,7 +10,7 @@ class ProductosFarmaciaExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        return Medication::all(); // Obtén todos los productos de farmacia
+        return Medication::all(); 
     }
 
     public function headings(): array

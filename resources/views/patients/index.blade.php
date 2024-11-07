@@ -33,7 +33,6 @@
         <table class="table table-striped">
             <thead class="table-light">
                 <tr>
-                    <th>ID</th>
                     <th>CUI</th>
                     <th>Nº Expedientes</th>
                     <th>Nombre Completo</th>
@@ -45,7 +44,6 @@
             <tbody id="patient-table-body">
                 @forelse($patients as $patient)
                     <tr>
-                        <td>{{ $patient['id'] }}</td>
                         <td>{{ $patient['cui'] }}</td>
                         <td>{{ $patient['nexpedientes'] }}</td>
                         <td>{{ $patient['full_name'] }}</td>
@@ -94,7 +92,7 @@ document.getElementById('search-input').addEventListener('input', function() {
     .then(response => response.json())
     .then(data => {
         const tbody = document.getElementById('patient-table-body');
-        tbody.innerHTML = ''; // Limpiar la tabla antes de insertar nuevos datos
+        tbody.innerHTML = ''; 
 
         if (data.patients.length === 0) {
             tbody.innerHTML = `<tr><td colspan="7" class="text-center">No se encontraron pacientes.</td></tr>`;
@@ -129,7 +127,7 @@ document.getElementById('search-input').addEventListener('input', function() {
 <!-- Confirmación de eliminación con SweetAlert -->
 <script>
     function confirmDelete(event) {
-        event.preventDefault(); // Evitar el envío automático del formulario
+        event.preventDefault(); 
 
         Swal.fire({
             title: '¿Está seguro que quiere eliminar este paciente?',
@@ -142,7 +140,7 @@ document.getElementById('search-input').addEventListener('input', function() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                event.target.submit(); // Envía el formulario si el usuario confirma
+                event.target.submit();
             }
         });
     }
@@ -150,23 +148,23 @@ document.getElementById('search-input').addEventListener('input', function() {
 
 <style>
     body {
-        background-color: #f8f9fa; /* Fondo claro */
+        background-color: #f8f9fa; 
     }
     .container {
         margin-top: 20px;
-        background-color: #ffffff; /* Fondo blanco para el contenedor */
+        background-color: #ffffff; 
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     .table th {
-        background-color: #e9ecef; /* Color de fondo para encabezados */
+        background-color: #e9ecef; 
     }
     .table td {
-        vertical-align: middle; /* Centrar contenido en las celdas */
+        vertical-align: middle; 
     }
     .btn {
-        margin: 0 2px; /* Espaciado entre botones */
+        margin: 0 2px; 
     }
 </style>
 @endsection

@@ -5,43 +5,43 @@
 @section('content')
 <style>
     body {
-        font-family: 'Poppins', sans-serif; /* Applying the new font */
-        background-color: #f8f9fa; /* Light background for contrast */
+        font-family: 'Poppins', sans-serif; 
+        background-color: #f8f9fa; 
     }
 
     .container {
-        margin-top: 120px; /* Increased top margin for more space */
-        margin-bottom: 50px; /* Optional bottom margin for spacing */
+        margin-top: 120px; 
+        margin-bottom: 50px; 
     }
 
     .card {
         border-radius: 10px;
-        border: none; /* Remove default card border */
+        border: none; 
     }
 
     .card-header {
-        background-color: #3498db; /* Card header color */
-        color: white; /* Text color in header */
-        border-top-left-radius: 10px; /* Rounded corners */
-        border-top-right-radius: 10px; /* Rounded corners */
+        background-color: #3498db; 
+        color: white; 
+        border-top-left-radius: 10px; 
+        border-top-right-radius: 10px; 
     }
 
     .btn-primary {
-        background-color: #3498db; /* Button color */
-        border: none; /* Remove default border */
+        background-color: #3498db; 
+        border: none; 
     }
 
     .btn-primary:hover {
-        background-color: #2980b9; /* Darker shade on hover */
+        background-color: #2980b9; 
     }
 
     .form-group label {
-        font-weight: 500; /* Slightly bold labels */
+        font-weight: 500; 
     }
 
     h1 {
-        color: #2c3e50; /* Header color */
-        font-weight: 600; /* Bold header */
+        color: #2c3e50; 
+        font-weight: 600; 
     }
 
     .alert {

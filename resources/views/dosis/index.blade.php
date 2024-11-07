@@ -18,7 +18,6 @@
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Vacuna</th>
                 <th>Acciones</th>
@@ -27,7 +26,6 @@
         <tbody>
             @foreach ($dosis as $dosisItem)
                 <tr>
-                    <td>{{ $dosisItem->id }}</td>
                     <td>{{ $dosisItem->nombre }}</td>
                     <td>{{ $dosisItem->vacuna->nombre }}</td>
                     <td>

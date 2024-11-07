@@ -24,11 +24,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('layouts.layout', function ($view) {
-            // Contar citas pendientes usando el modelo Cita
+            
             $citasPendientesCount = Cita::where('status', 'pendiente')->count();
             $view->with('citasPendientesCount', $citasPendientesCount);
 
-             // Contar exámenes pendientes (cambia "finalizado" por "pendiente")
+             
             $examenesPendientesCount = RealizarExamen::where('status', 'pendiente')->count();
             $view->with('examenesPendientesCount', $examenesPendientesCount);
         });

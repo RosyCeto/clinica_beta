@@ -9,13 +9,13 @@ class VacunaController extends Controller
 {
     public function index()
     {
-        $vacunas = Vacuna::paginate(8); // Cambiar a paginación
+        $vacunas = Vacuna::paginate(8);
         return view('vacunas.index', compact('vacunas'));
     }
 
     public function create()
     {
-        return view('vacunas.create'); // Vista para crear nueva vacuna
+        return view('vacunas.create'); 
     }
 
     public function store(Request $request)
@@ -30,7 +30,7 @@ class VacunaController extends Controller
 
     public function edit(Vacuna $vacuna)
     {
-        return view('vacunas.edit', compact('vacuna')); // Vista para editar vacuna
+        return view('vacunas.edit', compact('vacuna'));
     }
 
     public function update(Request $request, Vacuna $vacuna)

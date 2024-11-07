@@ -13,9 +13,9 @@ class CreateSalidasTable extends Migration
     {
         Schema::create('salidas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('medication_id')->constrained('medications')->onDelete('cascade'); // Relación con medicamentos
-            $table->integer('cantidad'); // Cantidad de medicamentos salientes
-            $table->date('fecha_salida'); // Fecha de salida
+            $table->foreignId('medication_id')->constrained('medications')->onDelete('cascade'); 
+            $table->integer('cantidad'); 
+            $table->date('fecha_salida'); 
             $table->timestamps();
         });
     }

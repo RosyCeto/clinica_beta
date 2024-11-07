@@ -77,16 +77,16 @@
 
 <style>
     .card {
-        border: none; /* Elimina el borde de la tarjeta */
-        margin-top: 20px; /* Ajusta el margen superior */
+        border: none; 
+        margin-top: 20px; 
     }
     .table th {
-        background-color: #e9ecef; /* Fondo gris claro para encabezados de tabla */
-        color: #007BFF; /* Color azul para texto de encabezados */
-        font-weight: bold; /* Aumenta el peso de la fuente para los encabezados */
+        background-color: #e9ecef; 
+        color: #007BFF; 
+        font-weight: bold; 
     }
     .badge {
-        font-size: 0.9rem; /* Tamaño de fuente más pequeño para badges */
+        font-size: 0.9rem;
     }
 </style>
 @endsection

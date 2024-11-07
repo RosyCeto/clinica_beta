@@ -7,49 +7,49 @@
 @section('content')
     <style>
         body {
-            background-color: #f8f9fa; /* Fondo suave */
-            font-family: 'Arial', sans-serif; /* Fuente moderna */
-            color: #333; /* Color del texto */
+            background-color: #f8f9fa; 
+            font-family: 'Arial', sans-serif; 
+            color: #333; 
         }
 
         h2 {
             text-align: center;
             margin-bottom: 20px;
             font-size: 2em;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra en el texto */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
         }
 
         .list-group {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centra los elementos */
-            max-width: 600px; /* Ancho máximo para la lista */
-            margin: 0 auto; /* Centrar la lista en la página */
-            padding: 0; /* Sin padding */
+            align-items: center; 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 0; 
         }
 
         .list-group-item {
-            background-color: #ffffff; /* Fondo blanco para los elementos */
-            border: 1px solid #dee2e6; /* Borde suave */
-            border-radius: 8px; /* Bordes redondeados */
-            margin: 10px 0; /* Espaciado entre los elementos */
-            padding: 15px; /* Padding interno */
-            width: 100%; /* Ocupa el ancho total */
-            transition: all 0.3s ease; /* Transición suave para efectos */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+            background-color: #ffffff; 
+            border: 1px solid #dee2e6; 
+            border-radius: 8px; 
+            margin: 10px 0; 
+            padding: 15px; 
+            width: 100%; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
         }
 
         .list-group-item:hover {
-            background-color: #e9ecef; /* Cambio de color al pasar el mouse */
-            transform: translateY(-2px); /* Elevación al pasar el mouse */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el mouse */
+            background-color: #e9ecef; 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
         }
 
         .list-group-item-action {
-            color: #007bff; /* Color del texto de los enlaces */
-            text-decoration: none; /* Sin subrayado */
-            font-size: 1.2em; /* Tamaño de fuente aumentado */
-            text-align: center; /* Centrar el texto */
+            color: #007bff; 
+            text-decoration: none; 
+            font-size: 1.2em;
+            text-align: center;
         }
     </style>
 
@@ -60,6 +60,5 @@
         <a href="{{ route('reportes.pacientes') }}" class="list-group-item list-group-item-action">Reporte de Pacientes</a>
         <a href="{{ route('reportes.historiales') }}" class="list-group-item list-group-item-action">Reporte de Historial Clínico</a>
         <a href="{{ route('reportes.farmacia') }}" class="list-group-item list-group-item-action">Reporte de Datos de Farmacia</a>
-        <a href="{{ route('export.salidas') }}" class="btn btn-warning">Exportar Salidas</a>
     </div>
 @endsection

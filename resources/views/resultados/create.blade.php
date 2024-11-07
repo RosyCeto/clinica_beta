@@ -39,16 +39,15 @@
 
 <style>
     .container {
-        max-width: 600px; /* Limitar el ancho de la tarjeta */
+        max-width: 600px; 
     }
     .card {
-        border-radius: 8px; /* Bordes redondeados para la tarjeta */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para un mejor efecto */
+        border-radius: 8px; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     }
     .form-group label {
-        font-weight: bold; /* Etiquetas en negrita */
-        color: #0056b3; /* Color de las etiquetas */
+        font-weight: bold; 
+        color: #0056b3; 
     }
 </style>
-
 @endsection

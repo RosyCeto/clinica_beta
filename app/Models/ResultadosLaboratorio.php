@@ -28,6 +28,4 @@ class ResultadosLaboratorio extends Model
     {
         return $this->belongsTo(Examen::class);
     }
-
-    
 }

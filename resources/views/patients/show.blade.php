@@ -40,7 +40,7 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('deleteForm').submit(); // Envía el formulario si el usuario confirma
+                    document.getElementById('deleteForm').submit(); 
                 }
             });
         }

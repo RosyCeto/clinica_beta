@@ -16,15 +16,11 @@ class Cita extends Model
         'status',
     ];
 
-    // Relación con el modelo Paciente
     public function paciente()
 {
     return $this->belongsTo(Patient::class, 'paciente_id');
 }
 
-
-
-    // Relación con el modelo Medico
     public function medico()
     {
         return $this->belongsTo(Medico::class);

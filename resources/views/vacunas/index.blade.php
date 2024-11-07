@@ -18,7 +18,6 @@
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
             </tr>
@@ -26,7 +25,6 @@
         <tbody>
             @foreach ($vacunas as $vacuna)
                 <tr>
-                    <td>{{ $vacuna->id }}</td>
                     <td>{{ $vacuna->nombre }}</td>
                     <td>
                         <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#editVacunaModal{{ $vacuna->id }}" onclick="editVacuna('{{ $vacuna->id }}', '{{ $vacuna->nombre }}')">
@@ -109,9 +107,8 @@
         document.getElementById('edit-nombre-' + id).value = nombre;
     }
 
-    // Confirmación de eliminación con SweetAlert
     function confirmDelete(event) {
-        event.preventDefault(); // Evitar el envío automático del formulario
+        event.preventDefault();
         Swal.fire({
             title: '¿Está seguro que quiere eliminar esta vacuna?',
             text: "Esta acción no se puede deshacer.",
@@ -123,7 +120,7 @@
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                event.target.submit(); // Envía el formulario si el usuario confirma
+                event.target.submit(); 
             }
         });
     }

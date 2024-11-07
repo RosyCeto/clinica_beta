@@ -34,7 +34,6 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Usuario</th>
                 <th>Paciente</th>
                 <th>Médico</th>
@@ -46,7 +45,6 @@
         <tbody>
             @foreach ($realizarExamenes as $examen)
                 <tr>
-                    <td>{{ $examen->id }}</td>
                     <td>{{ $examen->usuario->name }}</td>
                     <td>{{ $examen->paciente->primer_nombre }} {{ $examen->paciente->primer_apellido }}</td>
                     <td>{{ $examen->medico->nombre }}</td>
@@ -94,7 +92,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function confirmDelete(event, examenId) {
-        event.preventDefault(); // Evitar el envío automático del formulario
+        event.preventDefault();
         Swal.fire({
             title: '¿Está seguro que quiere eliminar este examen?',
             text: "Esta acción no se puede deshacer.",
@@ -106,7 +104,7 @@
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('delete-form-' + examenId).submit(); // Envía el formulario si el usuario confirma
+                document.getElementById('delete-form-' + examenId).submit(); 
             }
         });
     }

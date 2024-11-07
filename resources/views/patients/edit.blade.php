@@ -92,25 +92,25 @@
             const fechaNacimiento = new Date(fechaNacimientoInput.value);
             const hoy = new Date();
         
-            // Calcular los años
+            
             let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
             const mesDiff = hoy.getMonth() - fechaNacimiento.getMonth();
             const diaDiff = hoy.getDate() - fechaNacimiento.getDate();
         
-            // Ajustar los años y meses si no ha llegado el cumpleaños
+          
             if (mesDiff < 0 || (mesDiff === 0 && diaDiff < 0)) {
                 edad--;
             }
         
-            let meses = (mesDiff + 12) % 12; // Calcular meses
+            let meses = (mesDiff + 12) % 12; 
             if (diaDiff < 0) {
-                meses = (meses + 11) % 12; // Si el día no ha llegado, ajusta el mes
+                meses = (meses + 11) % 12; 
             }
         
-            // Calcular días
-            let dias = (diaDiff + 30) % 30; // Aproximación de días
+      
+            let dias = (diaDiff + 30) % 30; 
         
-            // Mostrar edad en años, meses y días
+        
             edadInput.value = `${edad} años, ${meses} meses, ${dias} días`;
         }
         </script>

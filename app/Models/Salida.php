@@ -9,7 +9,7 @@ class Salida extends Model
 {
     use HasFactory;
 
-    protected $table = 'salidas'; // Asegúrate de que el nombre de la tabla sea correcto
+    protected $table = 'salidas'; 
 
     protected $fillable = [
         'medication_id',

@@ -11,10 +11,9 @@ class CreateDosisTable extends Migration
         Schema::create('dosis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vacuna_id');
-            $table->string('nombre');  // ejemplo: 'Primera dosis', 'Segunda dosis'
+            $table->string('nombre'); 
             $table->timestamps();
 
-            // Relación con vacunas
             $table->foreign('vacuna_id')->references('id')->on('vacunas')->onDelete('cascade');
         });
     }

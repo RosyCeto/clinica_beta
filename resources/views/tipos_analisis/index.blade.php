@@ -19,7 +19,6 @@
         <table class="table table-striped table-bordered shadow-sm">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Acciones</th>
                 </tr>
@@ -27,7 +26,6 @@
             <tbody>
                 @foreach ($tiposAnalisis as $tipo)
                     <tr>
-                        <td>{{ $tipo->id }}</td>
                         <td>{{ $tipo->nombre }}</td>
                         <td>
                             <a href="#" class="btn btn-warning shadow" data-toggle="modal" data-target="#editTipoAnalisisModal{{ $tipo->id }}" onclick="editTipoAnalisis('{{ $tipo->id }}', '{{ $tipo->nombre }}')">
@@ -112,7 +110,7 @@
 
     // Confirmación de eliminación con SweetAlert
     function confirmDelete(event) {
-        event.preventDefault(); // Evitar el envío automático del formulario
+        event.preventDefault(); 
         Swal.fire({
             title: '¿Está seguro que quiere eliminar este tipo de análisis?',
             text: "Esta acción no se puede deshacer.",
@@ -124,14 +122,14 @@
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                event.target.submit(); // Envía el formulario si el usuario confirma
+                event.target.submit(); 
             }
         });
     }
 </script>
 
 <style>
-    /* Estilos personalizados */
+    
     .table {
         border-radius: 0.5rem;
         overflow: hidden;

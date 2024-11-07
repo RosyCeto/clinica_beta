@@ -11,12 +11,11 @@ class Examen extends Model
 
     protected $fillable = [
         'nombre',
-        'tipo_analisis_id', // Asegúrate de que coincide con la columna en la tabla
+        'tipo_analisis_id',
     ];
 
-    protected $table = 'examenes';  // Asegúrate de que apunta a la tabla correcta
+    protected $table = 'examenes';  
 
-    // Relación con TipoAnalisis
 
 public function tipoAnalisis()
 {

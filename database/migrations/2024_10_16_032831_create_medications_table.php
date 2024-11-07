@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('medications', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique(); // Asegura que el nombre sea único
+            $table->string('nombre');
             $table->text('descripcion')->nullable();
-            $table->string('codigo')->unique(); // Añadir el campo 'codigo' asegurando que sea único
-            $table->integer('cantidad')->default(0); // Establece un valor por defecto de 0
+            $table->string('codigo');
+            $table->integer('cantidad')->default(0); 
             $table->date('fecha_caducidad');
+            $table->date('fecha_ingreso')->default(now());
             $table->timestamps();
 
-            // Índice para fecha de caducidad
             $table->index('fecha_caducidad');
         });
     }

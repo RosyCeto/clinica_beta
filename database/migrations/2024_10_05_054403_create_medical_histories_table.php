@@ -14,13 +14,13 @@ return new class extends Migration
     Schema::create('medical_histories', function (Blueprint $table) {
         $table->id();
         $table->foreignId('patient_id')->constrained()->onDelete('cascade');
-        $table->enum('type_consult', ['primera consulta', 'reconsulta']);
+        $table->enum('type_consult', ['primera consulta', 'consulta general']);
         $table->text('consultation_reason')->nullable();
         $table->text('current_illness_history')->nullable();
-        $table->text('personal_history');
-        $table->text('family_history');
-        $table->text('habits_history');
-        $table->text('allergies');
+        $table->text('personal_history')->nullable();
+        $table->text('family_history')->nullable();
+        $table->text('habits_history')->nullable();
+        $table->text('allergies')->nullable();
         $table->text('vital_signs');
         $table->float('weight');
         $table->float('height');

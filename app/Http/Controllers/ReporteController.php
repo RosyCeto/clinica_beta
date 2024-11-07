@@ -26,17 +26,13 @@ class ReporteController extends Controller
 
     public function reporteHistoriales()
     {
-        return Excel::download(new HistorialClinicoExport(), 'reporte_historiales.xlsx'); // Generar el reporte de historiales clínicos
+        return Excel::download(new HistorialClinicoExport(), 'reporte_historiales.xlsx'); 
     }
 
     public function reporteFarmacia()
     {
-        return Excel::download(new ProductosFarmaciaExport(), 'reporte_farmacia.xlsx'); // Generar el reporte de farmacia
+        return Excel::download(new ProductosFarmaciaExport(), 'reporte_farmacia.xlsx'); 
     }
 
-    public function exportSalidas()
-    {
-        return Excel::download(new SalidasMedicamentosExport(), 'salidas_medicamentos.xlsx');
-    }
 
 }

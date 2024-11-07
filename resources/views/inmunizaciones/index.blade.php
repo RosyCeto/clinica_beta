@@ -21,7 +21,6 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Paciente</th>
                 <th>Vacuna</th>
                 <th>Dosis</th>
@@ -32,7 +31,6 @@
         <tbody id="inmunization-table-body">
             @foreach ($inmunizaciones as $inmunizacion)
                 <tr>
-                    <td>{{ $inmunizacion->id }}</td>
                     <td>{{ $inmunizacion->paciente->primer_nombre }} {{ $inmunizacion->paciente->primer_apellido }}</td>
                     <td>{{ $inmunizacion->vacuna->nombre }}</td>
                     <td>{{ $inmunizacion->dosis->nombre }}</td>
@@ -62,9 +60,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // Confirmación de eliminación
+    
     function confirmDelete(event, examenId) {
-        event.preventDefault(); // Evitar el envío automático del formulario
+        event.preventDefault(); 
         Swal.fire({
             title: '¿Está seguro que quiere eliminar esta inmunización?',
             text: "Esta acción no se puede deshacer.",
@@ -76,20 +74,19 @@
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('delete-form-' + examenId).submit(); // Envía el formulario si el usuario confirma
+                document.getElementById('delete-form-' + examenId).submit(); 
             }
         });
     }
 
-    // Búsqueda dinámica
     $(document).ready(function() {
         $('#search').on('keyup', function() {
             let searchValue = $(this).val().toLowerCase();
             $('#inmunization-table-body tr').filter(function() {
                 $(this).toggle(
-                    $(this).children('td').eq(0).text().toLowerCase().indexOf(searchValue) > -1 || // ID
-                    $(this).children('td').eq(1).text().toLowerCase().indexOf(searchValue) > -1 || // Paciente
-                    $(this).children('td').eq(2).text().toLowerCase().indexOf(searchValue) > -1 // Vacuna
+                    $(this).children('td').eq(0).text().toLowerCase().indexOf(searchValue) > -1 || 
+                    $(this).children('td').eq(1).text().toLowerCase().indexOf(searchValue) > -1 || 
+                    $(this).children('td').eq(2).text().toLowerCase().indexOf(searchValue) > -1 
                 );
             });
         });

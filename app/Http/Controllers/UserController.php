@@ -28,7 +28,7 @@ public function toggleStatus($id)
     $user->status = !$user->status;
     $user->save();
 
-    // Cerrar sesión si el usuario se vuelve inactivo
+
     if (!$user->status && Auth::id() == $user->id) {
         Auth::logout();
         return redirect()->route('login')->with('error', 'Tu cuenta ha sido desactivada.');
@@ -77,7 +77,7 @@ public function update(Request $request, $id)
 {
     $user = User::findOrFail($id);
 
-    // Validar los datos
+
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
@@ -85,10 +85,10 @@ public function update(Request $request, $id)
         'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
-    // Actualizar los datos
+
     $user->update($request->except('foto'));
 
-    // Manejar la imagen de perfil
+
     if ($request->hasFile('foto')) {
         $path = $request->file('foto')->store('fotos', 'public');
         $user->foto = $path;
@@ -119,8 +119,5 @@ public function perfil()
     }
 
     return redirect()->route('perfil')->with('status', 'Imagen actualizada correctamente.');
-}
-
-
-
+    }
 }

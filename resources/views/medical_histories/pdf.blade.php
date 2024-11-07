@@ -5,114 +5,108 @@
     <title>Historial Médico del Paciente</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f4f7;
-            font-size: 14px; /* Tamaño de letra ligeramente más grande */
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 24px; /* Título más grande */
+            background-color: #f4f6f9;
+            color: #333;
         }
         .container {
-            max-width: 100%;
-            margin: 0;
-            padding: 40px; /* Margen superior e inferior mayor */
-            background-color: white;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            height: 100vh; /* Ocupa todo el alto de la hoja */
-            box-sizing: border-box;
+            border: 2px solid #2980b9; 
         }
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 20px; /* Mayor separación en el encabezado */
+            text-align: center;
+            margin-bottom: 30px;
         }
-        .logo {
-            width: 180px; /* Logo más grande */
+        .header img {
+            width: 120px;
             height: auto;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para el logo */
-            border-radius: 5px; /* Bordes redondeados */
+            margin-bottom: 20px;
         }
-        .expediente {
-            text-align: right; /* Alinea el expediente a la derecha */
-        }
-        .expediente strong {
-            font-size: 16px; /* Tamaño de fuente ajustado */
+        h1 {
+            font-size: 24px;
             color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
-        .data-section {
+        .content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .content strong {
+            color: #2980b9;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
             margin-top: 30px;
-            line-height: 1.6; /* Espaciado mayor entre líneas */
-            text-align: justify; /* Justifica el texto */
-        }
-        .data-section strong {
-            color: #34495e;
-        }
-        /* Estilos de sombra y bordes para las secciones */
-        .data-section {
-            background-color: #f9fafb;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{ public_path('plantilla/dist/img/salud.jpg') }}" alt="Logotipo MSPAS" class="logo">
-            <div class="expediente">
-                <strong>No. Expediente:</strong> {{ $patient->nexpedientes }}<br>
-            </div>
+            <img src="{{ public_path('plantilla/dist/img/salud.jpg') }}" alt="Logotipo MSPAS">
+            <h1>Historial Médico del Paciente</h1>
+            <div><strong>No. Expediente:</strong> {{ $patient->nexpedientes }}</div>
         </div>
-        <h1>Historial Médico del Paciente</h1>
-        <div class="data-section">
-            <strong>Datos Generales del Paciente</strong><br>
-            CUI: {{ $patient->cui }}<br>
-            Nombre Completo: {{ $patient->full_name }}<br>
-            Apellido de Casada: {{ $patient->apellido_casada }}<br>
-            Sexo: {{ $patient->gender }}<br>
-            Fecha de Nacimiento: {{ $patient->fecha_nacimiento }}<br>
-            Edad: {{ $patient->edad }} años<br>
-            Discapacidad: {{ $patient->discapacidad ?? 'N/A' }}<br>
-            <strong>Tipo de Consulta:</strong> {{ $medicalHistory->type_consult }}<br>
-            <strong>Motivo de Consulta:</strong>
-            @if(!empty(trim($medicalHistory->consultation_reason)))
-                {{ strip_tags(html_entity_decode($medicalHistory->consultation_reason)) }}<br>
-            @else
-                N/A<br>
-            @endif
-            <strong>Historia de la Enfermedad Actual:</strong>
-            @if(!empty(trim($medicalHistory->current_illness_history)))
-                {{ strip_tags(html_entity_decode($medicalHistory->current_illness_history)) }}<br>
-            @else
-                N/A<br>
-            @endif
-            <strong>Historia Personal:</strong> {{ $medicalHistory->personal_history }}<br>
-            <strong>Historia Familiar:</strong> {{ $medicalHistory->family_history }}<br>
-            <strong>Historia de Hábitos:</strong> {{ $medicalHistory->habits_history }}<br>
-            <strong>Alergias:</strong> {{ $medicalHistory->allergies }}<br>
-            <strong>Signos Vitales:</strong> {{ $medicalHistory->vital_signs }}<br>
-            <strong>Peso:</strong> {{ $medicalHistory->weight }} kg<br>
-            <strong>Altura:</strong> {{ $medicalHistory->height }} cm<br>
-            <strong>Diagnóstico y Tratamiento:</strong>
-            @if(!empty($medicalHistory->diagnosis_treatment))
-                {{ strip_tags(html_entity_decode($medicalHistory->diagnosis_treatment)) }}<br>
-            @else
-                N/A
-            @endif
-            <strong>Comentarios:</strong>
-            @if(!empty($medicalHistory->comments))
-                {{ strip_tags(html_entity_decode($medicalHistory->comments)) }}<br>
-            @else
-                N/A
-            @endif
+
+        <!-- Datos Generales del Paciente -->
+        <div class="content">
+            <p><strong>CUI:</strong> {{ $patient->cui }}</p>
+            <p><strong>Nombre Completo:</strong> {{ $patient->full_name }}</p>
+            <p><strong>Apellido de Casada:</strong> {{ $patient->apellido_casada }}</p>
+            <p><strong>Sexo:</strong> {{ $patient->gender }}</p>
+            <p><strong>Fecha de Nacimiento:</strong> {{ $patient->fecha_nacimiento }}</p>
+            <p><strong>Edad:</strong> {{ $patient->edad }} años</p>
+            <p><strong>Discapacidad:</strong> {{ $patient->discapacidad ?? 'N/A' }}</p>
+        </div>
+
+        <!-- Tipo de Consulta -->
+        <div class="content">
+            <p><strong>Tipo de Consulta:</strong> {{ $medicalHistory->type_consult ?? 'N/A' }}</p>
+        </div>
+
+        <!-- Motivo de Consulta -->
+        <div class="content">
+            <p><strong>Motivo de Consulta:</strong> @if(!empty(trim($medicalHistory->consultation_reason))){{ strip_tags(html_entity_decode($medicalHistory->consultation_reason)) }}@else N/A @endif</p>
+        </div>
+    
+        <!-- Historia de la Enfermedad Actual -->
+        <div class="content">
+            <p><strong>Historia de la Enfermedad Actual:</strong> @if(!empty(trim($medicalHistory->current_illness_history))){{ strip_tags(html_entity_decode($medicalHistory->current_illness_history)) }}@else N/A @endif</p>
+        </div>
+    
+        <!-- Antecedentes de la Primera Consulta -->
+        <div class="content">
+            <p><strong>Historia Personal:</strong> {{ $firstConsultation->personal_history ?? 'N/A' }}</p>
+            <p><strong>Historia Familiar:</strong> {{ $firstConsultation->family_history ?? 'N/A' }}</p>
+            <p><strong>Historia de Hábitos:</strong> {{ $firstConsultation->habits_history ?? 'N/A' }}</p>
+            <p><strong>Alergias:</strong> {{ $firstConsultation->allergies ?? 'N/A' }}</p>
+        </div>
+    
+        <!-- Diagnóstico y Tratamiento -->
+        <div class="content">
+            <p><strong>Diagnóstico y Tratamiento:</strong> @if(!empty($medicalHistory->diagnosis_treatment)){{ strip_tags(html_entity_decode($medicalHistory->diagnosis_treatment)) }}@else N/A @endif</p>
+        </div>
+    
+        <!-- Comentarios -->
+        <div class="content">
+            <p><strong>Comentarios:</strong> @if(!empty($medicalHistory->comments)){{ strip_tags(html_entity_decode($medicalHistory->comments)) }}@else N/A @endif</p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; Expediente Médico - Centro de Salud Cantón Xebac</p>
         </div>
     </div>
 </body>

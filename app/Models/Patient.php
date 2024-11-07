@@ -32,24 +32,19 @@ class Patient extends Model
     ];
 
 
-    // Relación con el modelo MedicalHistory
     public function medicalHistories()
     {
         return $this->hasMany(MedicalHistory::class);
     }
 
-    // Relación con el modelo Laboratory
+
     public function laboratories()
     {
         return $this->hasMany(Laboratory::class);
     }
 
-   
     public function getFullNameAttribute()
     {
         return trim("{$this->primer_nombre} {$this->segundo_nombre} {$this->primer_apellido} {$this->segundo_apellido}");
     }
-
-
-    
 }

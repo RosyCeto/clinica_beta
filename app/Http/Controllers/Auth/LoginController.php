@@ -5,15 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    // Aquí puedes personalizar la redirección después del inicio de sesión
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     public function __construct()
     {
@@ -22,12 +20,10 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout(); // Cierra la sesión
+        Auth::logout(); 
 
-        return redirect('/login'); // Redirige a la página de inicio de sesión
+        return redirect('/login'); 
     }
-
-
 
     protected function authenticated(Request $request, $user)
 {
@@ -36,7 +32,6 @@ class LoginController extends Controller
         return redirect()->route('login')->with('error', 'Tu cuenta ha sido desactivada. Contacte al administrador.');
     }
 
-    // Verifica si el rol existe y redirige según el rol
     if (isset($user->role)) {
         switch ($user->role) {
             case 'admin':
@@ -52,8 +47,6 @@ class LoginController extends Controller
         }
     }
 
-    // Redirigir a una ruta por defecto si el rol no está definido
-    return redirect('/home');
-}
-
+    return redirect('/login');
+    }
 }

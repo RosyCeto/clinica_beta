@@ -11,34 +11,31 @@ class Medication extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre', 'descripcion', 'codigo', 'cantidad', 'fecha_caducidad' // Añadido el campo 'codigo'
+        'nombre', 'descripcion', 'codigo', 'cantidad', 'fecha_caducidad', 'fecha_ingreso'
     ];
 
-    protected $dates = ['fecha_caducidad'];
+    protected $dates = ['fecha_caducidad', 'fecha_ingreso'];
 
     protected $casts = [
-        'fecha_caducidad' => 'date', // Esto convierte la fecha a Carbon
+        'fecha_caducidad' => 'date', 
+        'fecha_ingreso' => 'date',
     ];
     
-    // Mutador para asegurar que la cantidad nunca sea negativa
     public function setCantidadAttribute($value)
     {
         $this->attributes['cantidad'] = max(0, (int) $value);
     }
 
-    // Accesor para formatear la fecha de caducidad
     public function getFormattedFechaCaducidadAttribute()
     {
         return $this->fecha_caducidad->format('d/m/Y');
     }
 
-    // Scope para medicamentos próximos a caducar
     public function scopeProximosACaducar($query)
     {
         return $query->where('fecha_caducidad', '<', now()->addMonth());
     }
 
-    // Scope para medicamentos bajos en stock
     public function scopeBajoStock($query, $cantidad = 10)
     {
         return $query->where('cantidad', '<', $cantidad);

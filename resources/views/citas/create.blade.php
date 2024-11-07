@@ -53,12 +53,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input type="text" id="search_paciente" class="form-control" placeholder="Buscar por nombre, apellido, CUI, expediente">
+                <input type="text" id="search_paciente" class="form-control" placeholder="Buscar por nombre, apellido o CUI">
                 <br>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>CUI</th>
                             <th>Nombre Completo</th>
                             <th>Edad</th>
@@ -68,7 +67,6 @@
                     <tbody id="patient-table-body">
                         @forelse($pacientes as $paciente)
                             <tr>
-                                <td>{{ $paciente->id }}</td>
                                 <td>{{ $paciente->cui }}</td>
                                 <td>{{ $paciente->primer_nombre }} {{ $paciente->primer_apellido }}</td>
                                 <td>{{ $paciente->edad }}</td>
@@ -150,7 +148,7 @@
 <!-- JavaScript para Manejo de Búsqueda -->
 <script>
     $(document).ready(function() {
-        // Función para buscar pacientes
+        
         $('#search_paciente').on('keyup', function() {
             var value = $(this).val().toLowerCase();
             $('#patient-table-body tr').filter(function() {
@@ -158,7 +156,7 @@
             });
         });
 
-        // Función para buscar médicos
+        
         $('#search_medico').on('keyup', function() {
             var value = $(this).val().toLowerCase();
             $('#medico-table-body tr').filter(function() {
@@ -166,7 +164,7 @@
             });
         });
 
-         // Manejar el clic en paciente
+         
          $(document).on('click', '.agregar-paciente', function(event) {
             event.preventDefault();
             const paciente = $(this).data();
@@ -179,7 +177,7 @@
             $('.modal-backdrop').remove();
         });
     
-        // Manejar el clic en médico
+        
         $(document).on('click', '.agregar-medico', function(event) {
             event.preventDefault();
             const medico = $(this).data();

@@ -22,4 +22,3 @@ class Medico extends Model
         return $this->hasMany(RealizarExamen::class);
     }
 }
-
